@@ -1,8 +1,15 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <script type='text/javascript' src='jwplayer/jwplayer.js'></script>
+  <!--<script type='text/javascript' src='jwplayer/jwplayer.js'></script>-->
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
   <script type='text/javascript'>
+
+      var playAt = function(id, time) {
+          console.debug(id, time);
+          $(id + " iframe").src = "http://www.youtube.com/embed/Y-xZAxQuJzA#t=" + time;
+      }
+
     $(document).ready(function() {
       var video = '\
       <div class="action"> \
@@ -15,27 +22,65 @@
       <iframe width="300" height="200" src="http://www.youtube.com/embed/85WjLBsJVjc" frameborder="0" allowfullscreen></iframe>\
       </div>';
       var ba = '\
-      <div class="action">\
+      <div class="action"> \
+      <iframe width="300" height="200" src="http://www.youtube.com/embed/Y-xZAxQuJzA" frameborder="0" allowfullscreen></iframe>\
       <img src="img/1-b.png" width="200">\
       <img src="img/1-a.png" width="200">\
       </div>\
       <div class="action"> \
+      <iframe width="300" height="200" src="http://www.youtube.com/embed/ebt1iec9X2E" frameborder="0" allowfullscreen></iframe>\
       <img src="img/2-b.png" width="200">\
       <img src="img/2-a.png" width="200">\
       </div>\
       <div class="action"> \
+      <iframe width="300" height="200" src="http://www.youtube.com/embed/85WjLBsJVjc" frameborder="0" allowfullscreen></iframe>\
       <img src="img/3-b.png" height="150">\
       <img src="img/3-a.png" height="150">\
       </div>';
+
+
       var wip = '\
-      <div class="action">\
-      <img src="img/wip.png" width="200">\
+      <div class="action" id="wf1">\
+          <iframe width="240" height="160" src="http://www.youtube.com/embed/Y-xZAxQuJzA" frameborder="0" allowfullscreen></iframe>\
+          <div class="workflow">\
+          <img src="img/1-b.png" width="110">\
+          <a href="#" onclick="playAt(\'#wf1\', \'1m37s\');return false;">saturation</a>\
+          <img src="img/1-1.png" width="110">\
+          <a href="#">curves</a>\
+          <img src="img/1-2.png" width="110">\
+          <a href="#">levels</a>\
+          <img src="img/1-3.png" width="110">\
+          <a href="#">curves</a>\
+          <img src="img/1-4.png" width="110">\
+          </div>\
       </div>\
-      <div class="action"> \
-      <img src="img/wip.png" width="200">\
+      <div class="action" id="wf2"> \
+          <iframe width="240" height="160" src="http://www.youtube.com/embed/ebt1iec9X2E" frameborder="0" allowfullscreen></iframe>\
+          <div class="workflow">\
+          <img src="img/2-b.png" width="110">\
+          <a href="#" onclick="playAt(\'#wf1\', \'1m37s\');return false;">gradient</a>\
+          <img src="img/2-1.png" width="110">\
+          <a href="#">curves</a>\
+          <img src="img/2-2.png" width="110">\
+          <a href="#">fill</a>\
+          <img src="img/2-3.png" width="110">\
+          <a href="#">new layer</a>\
+          <img src="img/2-4a.png" width="110">\
+          </div>\
       </div>\
-      <div class="action"> \
-      <img src="img/wip.png" width="200">\
+      <div class="action" id="wf3"> \
+          <iframe width="240" height="160" src="http://www.youtube.com/embed/85WjLBsJVjc" frameborder="0" allowfullscreen></iframe>\
+          <div class="workflow">\
+          <img src="img/3-b.png" width="100">\
+          <a href="#" onclick="playAt(\'#wf1\', \'1m37s\');return false;">hue/saturation</a>\
+          <img src="img/3-1.png" width="100">\
+          <a href="#">blur</a>\
+          <img src="img/3-2.png" width="100">\
+          <a href="#">overlay</a>\
+          <img src="img/3-3.png" width="100">\
+          <a href="#">paint brush</a>\
+          <img src="img/3-4.png" width="100">\
+          </div>\
       </div>';
       $("#actions #views").html(video);
       $("#actions #video-button").click(function() {
@@ -46,7 +91,8 @@
       });    
       $("#actions #wip-button").click(function() {
         $("#actions #views").html(wip);
-      });    
+      });
+
     }); 
   </script>
   <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
@@ -57,9 +103,10 @@
     #summary {float:left; width:450px;}
     #stats {float:left; width:450px;margin-left:20px;}
     #stats h3{margin-top:0px;}
-    #workflows {}
+
     .clear {clear:both;}
-    .action {float:left; width:300px; margin: 10px;}
+    .action {margin: 10px;}
+    .workflow {width:600px; display:inline;}
   </style>
 </head>
 <body>
@@ -101,7 +148,7 @@
         </li>
       </ul>  
     <br/>
-    <b>Select view: <span id="video-button"><a href=#>video</a></span> <span id="ba-button"><a href=#>before/after</a></span> <span id="wip-button"><a href=#>works-in-progress</a></span>
+    <b>Select view: <span id="video-button"><a href=#>video</a></span> <span id="ba-button"><a href=#>before/after</a></span> <span id="wip-button"><a href=#>workflow</a></span>
     <div id="views">
     </div>
     </div>
