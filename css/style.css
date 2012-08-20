@@ -1,0 +1,227 @@
+	body { 
+        /*background-color: #fff; 
+        padding: 0 20px; 
+        color:#000; 
+        font: 13px/18px Arial, sans-serif; */
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+	a { color: #360; }
+	h3 { padding-top: 20px; }
+
+    #controller { margin: 10px; }
+    ul { list-style-type:none; padding-left: 0px; margin: 0; }
+    input { height: 25px; }
+
+
+/* index.php */
+    ol { /*margin:5px 0 15px 16px; padding:0; */ margin: 0;list-style-type:none; }
+/*    #tutorial { display:block; height: 120px;}*/
+    #tutorial:after { clear:both; }
+    #thumbnail { /*float:left; margin-right:15px; max-width: 200px;*/ height: 150px; }
+    #thumbnail a img { float:left; margin-right:15px; max-width: 200px; max-height: 150px;}
+    #content { overflow:hidden; }
+    #results .row {margin-bottom:10px;}
+
+/* labeler.php */    
+    #form1 li { clear: both;}
+    #capture-form { background-color: #ddd; padding: 5px;}
+    #capture-list { margin: 0px; }
+    #capture-button {font-size:16px; height:30px; width:100px;}
+
+    .capture-header { height: 30px; clear: both; font-weight: bold; background: #ddd; }
+    .capture-item { height: 130px; clear: both;} 
+    .capture-image, .capture-time, .capture-tool, .capture-comment, .capture-option { float: left; padding: 10px; }
+    .capture-image { width: 200px; }
+    .capture-time { width: 50px; }
+    .capture-tool { width: 250px; }
+    .capture-comment { width: 250px; }
+    .capture-option { width: 50px; }
+
+    .capture-image a img { max-width: 180px; max-height: 120px; }
+    .list-image a img { max-width: 180px; max-height: 120px; }
+
+    #tool-icon { width: 30px; padding-left: 5px; padding-right: 5px; float: left; }
+    #labels { margin-top: 20px;}
+    .autocomplete-item { background-color: #fff; height: 25px; width: 200px;}
+    .autocomplete-item img{ width: 25px;}
+    #select-image, #select-tool, #select-menu, #select-other { height: 10px; }
+    
+    .label-header { height: 30px; clear: both; font-weight: bold; background:#ddd; }
+    .label-item { height: 130px; clear: both;}
+    .list-image, .list-time, .list-tool, .list-comment, .list-option { float: left; padding: 10px; }
+    .list-image { width: 200px; }
+    .list-time { width: 50px; }
+    .list-tool { width: 250px; }
+    .list-comment { width: 250px; }
+    .list-option { width: 50px; }
+
+    #tabs {width: 900px;}
+    .browse-initial, .browse-final { float:left; margin: 10px;}
+    .browse-initial a img, .browse-final a img { max-width: 300px; max-height: 300px; }
+    .browse-wip { float: left; margin: 10px; height: 230px; }
+    .browse-wip a img { max-width: 200px; max-height: 200px; }
+    .browse-steps-image, .browse-steps-tool { float: left; margin: 10px; height: 230px; }
+    .browse-steps-tool { width: 200px;}
+    .browse-steps-image a img { max-width: 200px; max-height: 200px; }    
+
+
+/* Timeline */
+    #timeline {
+        padding-top: 90px;
+        padding-bottom: 240px;
+        clear: both;
+        position: relative;
+    }
+/*
+    #playhead {
+        background-color: #4C646B; 
+        height: 15px;
+        width: 0px;
+        display: block;
+        position: absolute;
+    }
+*/
+    #control-left {
+        /*width: 70px;
+        float: left;*/
+        left: 0;
+        position: absolute;
+    }
+
+    #control-center {
+        margin: 0 70px;
+        position: relative;
+    }
+
+    #timeline-bottom {       
+        height: 15px;
+        width: 800px;
+        float: left;
+    }
+
+    .ui-slider-handle {
+        background-color: #999999;
+    }
+
+    .ui-slider-range-min {
+        background-color: #333333;
+    }
+
+    #control-right {
+        /*width:30px;
+        float: right;*/
+        right: 0;
+        position: absolute;       
+    }
+
+    .marker {
+        height: 15px;
+        width: 5px;
+        display: block;
+        position: absolute;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .marker-image {
+        background-color: #828594; /*#EA2E49;*/
+    }
+
+    .marker-tool {
+        background-color: #233138;
+    }
+
+    .marker-stick {
+        position: absolute;
+        width: 5px;
+        height: 50px;
+        background-color: #222;
+        opacity: 0.2;
+    }
+
+    .marker-stick-image {
+
+    }
+
+    .marker-stick-tool {
+        /*top: -50px;        */
+    }
+
+    .marker-stick-image-top {
+        margin-top: 15px !important;
+        height: 20px;
+    }
+    .marker-stick-image-bottom {
+        margin-top: 15px !important;
+        height: 115px;
+    }
+    .marker-stick-tool-top {
+        margin-top: -40px !important;
+        height: 40px;
+    }
+    .marker-stick-tool-bottom {
+        margin-top: -20px !important;
+        height: 20px;
+    }
+
+    .time-display {
+        font-weight: bold;
+    }
+
+    .timeline-popover {
+        /*width: 100px;*/
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .thumbnail { 
+        max-width: 200px; 
+    }
+
+/* popover override */
+    .popover-inner {
+        width: auto !important;
+        /*width: 100px;*/
+        height: auto !important;
+    }
+
+    .popover-title {
+        font-size: 12px;
+        border: none;
+        padding: 3px;
+        display:none;
+    }
+
+    .popover-content {
+        padding: 2px;
+    }
+
+    .popover-image-top {
+        margin-top: 5px !important;
+    }
+    .popover-image-bottom {
+        margin-top: 105px !important;
+    }
+    .popover-tool-top {
+        margin-top: -30px !important;
+    }
+    .popover-tool-bottom {
+        margin-top: -10px !important;
+    }
+
+/* carousel */
+    .jcarousel-control {
+        margin-bottom: 10px;
+    }
+
+    .jcarousel-control a {
+        /*font-size: 75%;*/
+        text-decoration: none;
+        padding: 0 5px;
+        margin: 0 0 5px 0;
+        border: 1px solid #fff;
+        color: #eee;
+        /*background-color: #4088b8;*/
+        font-weight: bold;
+    }
