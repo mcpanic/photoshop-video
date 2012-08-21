@@ -12,6 +12,7 @@
   if ($result->num_rows != 1)
     echo "query error";
   $row = $result->fetch_assoc();
+  $duration = $row['duration'];
   $video_filename = $row['filename'];
 
   $string = file_get_contents("video/$video_filename.info.json");

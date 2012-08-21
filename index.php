@@ -29,6 +29,7 @@ include('header.php');
   echo "<p>Total: $result->num_rows videos and $labels->num_rows labels</p>";
   while ($row = $result->fetch_assoc()) {
     $video_filename = $row['filename'];
+    $duration = $row['duration'];
     $string = file_get_contents("video/$video_filename.info.json");
     $json = json_decode($string, true);
 
@@ -56,7 +57,7 @@ include('header.php');
     </div>
     <div id="content" class="span5">
         <h3><?=$json['title'];?></h3>
-        <p><?=$html2?></p>
+        <p><?=$html2;?></p><p><?=$duration;?></p>
 	  </div>
   </div>
   </li>
@@ -66,7 +67,7 @@ include('header.php');
 
   } 
 ?>
-  </ol>
+</ol>
 
 </div><!--container-->
 
