@@ -34,14 +34,29 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.php">Tutorial Video Browser</a>
+          <a class="brand" href="list.php">Tutorial Video Browser</a>
           <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="index.php">Home</a></li>
-              <li class="active"><a href="index.php">Task 1: Motion Blur</a></li>
-              <li class="active"><a href="index.php">Task 2: Retro Effect</a></li>
-              <li class="active"><a href="index.php">Task 3: TBD</a></li>
+            <ul class="nav" id="task-selector">
+              <li><a href="tutorial.php">Tutorial</a></li>
+              <li><a href="list.php?tid=1">Task 1</a></li>
+              <li><a href="list.php?tid=2">Task 2</a></li>
+              <li><a href="list.php?tid=3">Task 3</a></li>              
             </ul>
+            <ul class="nav pull-right">
+              <li class="divider-vertical"></li>
+              <li class="dropdown" id="profile">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#profile"><i class="icon-user"></i><?php echo $_SESSION['username']; ?><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <?php if ($_SESSION["is_admin"]) { ?>
+                  <li><a href="list.php?tid=0">All videos</a></li>
+                  <li><a href="list-commands.php?scope=menu">Menu list</a></li>
+                  <li><a href="list-commands.php?scope=tool">Tool list</a></li>
+                  <li><a href="manage.php">Study Management</a></li>
+                  <?php } ?>
+                  <li><a href="logout.php">Logout</a></li>
+                </ul>
+              </li>
+            </ul>            
           </div><!--/.nav-collapse -->
         </div>
       </div>

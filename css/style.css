@@ -7,24 +7,35 @@
         padding-bottom: 40px;
     }
 	a { color: #360; }
-	h3 { padding-top: 20px; }
 
     #controller { margin: 10px; }
     ul { list-style-type:none; padding-left: 0px; margin: 0; }
     input { height: 25px; }
 
 
-/* index.php */
-    ol { /*margin:5px 0 15px 16px; padding:0; */ margin: 0;list-style-type:none; }
-/*    #tutorial { display:block; height: 120px;}*/
-    #tutorial:after { clear:both; }
-    #thumbnail { /*float:left; margin-right:15px; max-width: 200px;*/ height: 150px; }
-    #thumbnail a img { float:left; margin-right:15px; max-width: 200px; max-height: 150px;}
-    #content { overflow:hidden; }
-    #results .row {margin-bottom:10px;}
+/* list.php */
+    #filters h3 { margin: 0; padding: 0; }
+    #results { /*margin:5px 0 15px 16px; padding:0; */ margin-top: 20px; list-style-type:none; }
+    #results .row { padding-left: 20px; padding-bottom: 20px;}
+    /*.video-item { margin-left: -20px; padding-left: 20px; }*/
+    /* .video-item { display:block; height: 120px;} */
+    /*.video-item:after { clear:both; }*/
+    /*.video-view { /*float:left; margin-right:15px; max-width: 200px; height: 150px; }*/
+    /*.video-view a img { float:left; margin-right:15px; max-width: 200px; max-height: 150px;}*/
+    .video-info p { margin-left: 10px; }
+    .video-info-youtube h3, .video-info-google h3 { margin:0; }
+    .video-meta { color: #777777;}
+    .video-info-meta { padding-right: 15px; padding-top: 15px;}
+    .list-striped > li:nth-child(odd) { background-color: #eeeeee; }
+    .list-hover > li:hover { background-color: #DFE2FF; }
 
-/* labeler.php */    
-    #form1 li { clear: both;}
+    .applied-filter { background-color: #eeeeee; border: 1px solid #dddddd; padding: 3px; cursor: pointer; }
+    .applied-filter i { margin-left: 20px;}
+
+
+/* label.php */ 
+    #form1 { margin: 0; }   
+    #form1 li { clear: both; }
     #capture-form { background-color: #ddd; padding: 5px;}
     #capture-list { margin: 0px; }
     #capture-button {font-size:16px; height:30px; width:100px;}
@@ -35,18 +46,23 @@
     .capture-image { width: 200px; }
     .capture-time { width: 50px; }
     .capture-tool { width: 250px; }
+    .capture-tool label { display: inline; margin-right: 10px; }
+    .capture-tool div { margin-top: 10px; }
     .capture-comment { width: 250px; }
     .capture-option { width: 50px; }
 
     .capture-image a img { max-width: 180px; max-height: 120px; }
     .list-image a img { max-width: 180px; max-height: 120px; }
+    .tool-field, .comment-field { width: 190px; }
 
     #tool-icon { width: 30px; padding-left: 5px; padding-right: 5px; float: left; }
     #labels { margin-top: 20px;}
+    #tm { width: 25px;}
     .autocomplete-item { background-color: #fff; height: 25px; width: 200px;}
     .autocomplete-item img{ width: 25px;}
     #select-image, #select-tool, #select-menu, #select-other { height: 10px; }
-    
+
+
     .label-header { height: 30px; clear: both; font-weight: bold; background:#ddd; }
     .label-item { height: 130px; clear: both;}
     .list-image, .list-time, .list-tool, .list-comment, .list-option { float: left; padding: 10px; }
@@ -65,6 +81,11 @@
     .browse-steps-tool { width: 200px;}
     .browse-steps-image a img { max-width: 200px; max-height: 200px; }    
 
+
+/* browse.php */
+    #html_tutorial div {
+        font-size: 24px;
+    }
 
 /* Timeline */
     #timeline {
@@ -180,6 +201,10 @@
     }
 
 /* popover override */
+    .popover {
+        width: auto !important;
+    }
+
     .popover-inner {
         width: auto !important;
         /*width: 100px;*/
@@ -194,20 +219,23 @@
     }
 
     .popover-content {
-        padding: 2px;
+        padding: 5px;
     }
 
     .popover-image-top {
-        margin-top: 5px !important;
+        margin-top: 10px !important;
     }
     .popover-image-bottom {
-        margin-top: 105px !important;
+        margin-top: 110px !important;
     }
     .popover-tool-top {
-        margin-top: -30px !important;
+        margin-top: -40px !important;
     }
     .popover-tool-bottom {
         margin-top: -10px !important;
+    }
+    .popover-highlight {
+        background-color: #FFCC33;
     }
 
 /* carousel */
@@ -224,4 +252,8 @@
         color: #eee;
         /*background-color: #4088b8;*/
         font-weight: bold;
+    }
+
+    .jcarousel-skin-tango .jcarousel-container {
+        background-color: #ffffff !important;
     }

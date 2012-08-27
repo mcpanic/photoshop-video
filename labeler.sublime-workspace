@@ -1,0 +1,350 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"num",
+				"num_rows"
+			],
+			[
+				"la",
+				"labels"
+			],
+			[
+				"ta",
+				"tabs4_html"
+			],
+			[
+				"thum",
+				"thumb_html"
+			],
+			[
+				"time",
+				"timeline-bottom"
+			],
+			[
+				"list-",
+				"list-style-type"
+			],
+			[
+				"icon",
+				"icon-chevron-up"
+			],
+			[
+				"toggle",
+				"playlist-toggle"
+			],
+			[
+				"select-",
+				"select-image"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 307.0,
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Enable Package"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Applications/MAMP/htdocs/labeler/README",
+		"/Applications/MAMP/htdocs/labeler/index.php",
+		"/Applications/MAMP/htdocs/labeler/js/libs/jcview/jquery.jcview.js",
+		"/Applications/MAMP/htdocs/labeler/js/libs/jcview/jquery-jcview-0.0.1.min.js",
+		"/Applications/MAMP/htdocs/labeler/index.html",
+		"/Applications/MAMP/htdocs/odk2/css/custom.css",
+		"/Applications/MAMP/htdocs/odk2/hot.php",
+		"/Applications/MAMP/htdocs/odk2/schedule.php",
+		"/Applications/MAMP/htdocs/odk2/doongji.php",
+		"/Applications/MAMP/htdocs/odk2/scene.php",
+		"/Applications/MAMP/htdocs/odk2/star.php",
+		"/Applications/MAMP/htdocs/odk2/drama.php",
+		"/Applications/MAMP/htdocs/odk2/24tv.php",
+		"/Applications/MAMP/htdocs/odk2/account.php",
+		"/Applications/MAMP/htdocs/odk2/_social.php",
+		"/Applications/MAMP/htdocs/odk2/_rating.php",
+		"/Applications/MAMP/htdocs/odk2/playlist.php",
+		"/Applications/MAMP/htdocs/odk2/login.php",
+		"/Applications/MAMP/htdocs/odk2/js/script.js",
+		"/Applications/MAMP/htdocs/odk2/_recent.php",
+		"/Applications/MAMP/htdocs/odk2/_realtime.php",
+		"/Applications/MAMP/htdocs/odk2/_news.php",
+		"/Applications/MAMP/htdocs/odk2/index.php",
+		"/Applications/MAMP/htdocs/odk2/mask.php",
+		"/Applications/MAMP/htdocs/odk2/header.php",
+		"/Applications/MAMP/htdocs/odk2/footer.php",
+		"/Applications/MAMP/htdocs/odk2/juwon.php",
+		"/Applications/MAMP/htdocs/odk2/css/style.css",
+		"/Applications/MAMP/htdocs/labeler/labeler.php",
+		"/Applications/MAMP/htdocs/labeler/tools.json",
+		"/Applications/MAMP/htdocs/labeler/menus.json",
+		"/Applications/MAMP/htdocs/labeler/header.php",
+		"/Applications/MAMP/htdocs/labeler/css/style.css",
+		"/Applications/MAMP/htdocs/labeler/css/jcarousel/skins/tango/skin.css",
+		"/Applications/MAMP/htdocs/labeler/add-label.php",
+		"/Applications/MAMP/htdocs/labeler/js/script.js",
+		"/Applications/MAMP/htdocs/labeler/get-video-duration.php",
+		"/Applications/MAMP/htdocs/labeler/browser.php",
+		"/Applications/MAMP/htdocs/labeler/make-thumbnail.php",
+		"/Applications/MAMP/htdocs/labeler/ajax-make-thumbnail.php",
+		"/Applications/MAMP/htdocs/labeler/js/jcarousel/examples/static_controls.html",
+		"/Applications/MAMP/htdocs/labeler/css/jcarouosel/style.css",
+		"/Applications/MAMP/htdocs/labeler/video/85WjLBsJVjc.flv.info.json",
+		"/Applications/MAMP/htdocs/labeler/footer.php",
+		"/Users/juhokim/Downloads/initializr-verekia-3.0/css/style.css",
+		"/Users/juhokim/Downloads/initializr-verekia-3.0/js/script.js",
+		"/Applications/MAMP/htdocs/labeler/motionblur.php",
+		"/Applications/MAMP/htdocs/odk2/join.php",
+		"/Users/juhokim/Sites/odk2/drama.html",
+		"/Users/juhokim/Sites/odk2/scene.html",
+		"/Users/juhokim/Sites/odk2/css/custom.css",
+		"/Users/juhokim/Sites/odk2/mask.html",
+		"/Users/juhokim/Sites/odk2/js/script.js",
+		"/Users/juhokim/Sites/odk2/index.html",
+		"/Users/juhokim/Sites/odk2/login.html",
+		"/Users/juhokim/Sites/photoshop-video/20120416-prototype/retro.html",
+		"/Applications/MAMP/htdocs/labeler/autocomplete.php",
+		"/Applications/MAMP/htdocs/labeler/jcrop.php",
+		"/Applications/MAMP/htdocs/labeler/7z5YKi5cizA.flv.info.json",
+		"/Applications/MAMP/htdocs/labeler/crop-icons.sh",
+		"/Applications/MAMP/htdocs/labeler/youtube-download.sh",
+		"/Applications/MAMP/htdocs/labeler/video-url-list",
+		"/Applications/MAMP/htdocs/labeler/HnPh4hkdBSM.video.info.json",
+		"/Applications/MAMP/htdocs/labeler/QHP0ExWZNa4.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/XjvLF5N-1I8.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/RUUDpU_VQ1U.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/SwN44gu4YVk.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/85WjLBsJVjc.flv.info.json",
+		"/Applications/MAMP/htdocs/labeler/ZFtdvFEchug.flv.info.json",
+		"/Applications/MAMP/htdocs/labeler/qJ70dcSmf-M.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/ebt1iec9X2E.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/Y-xZAxQuJzA.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/jqHpQ9Isv-U.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/ndfm-esLqFs.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/E3-fKp7sTls.flv.info.json",
+		"/Applications/MAMP/htdocs/labeler/E3-fKp7sTls.flv.description",
+		"/Applications/MAMP/htdocs/labeler/video/t8sTxPBtt8A.mp4.info.json",
+		"/Applications/MAMP/htdocs/labeler/youtube-dl.py",
+		"/Users/juhokim/Sites/photoshop-video/20120416-prototype/motionblur.html",
+		"/Applications/MAMP/htdocs/labeler/js/tapmodo-Jcrop-25f2e18/README.md",
+		"/Applications/MAMP/htdocs/labeler/js/tapmodo-Jcrop-25f2e18/demos/crop.php",
+		"/Users/juhokim/Sites/odk2/js/libs/jwplayer/readme.html",
+		"/Users/juhokim/Sites/wedding/header.shtml",
+		"/Users/juhokim/Sites/wedding/index.html",
+		"/Users/juhokim/Sites/odk2/css/style.css",
+		"/Users/juhokim/Sites/bootstrap/index.html"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"icon-star",
+			"jwplayer()",
+			"display",
+			"hover",
+			"seek",
+			"pause",
+			"slider",
+			"timeline-popover",
+			"carousel",
+			"marker",
+			"tm_formatted",
+			"timeline-bottom",
+			"playhead",
+			"play-button",
+			"play-utton",
+			"val",
+			"playhead",
+			"900",
+			"playhead",
+			"getTime",
+			"900",
+			"jump",
+			"\n<?php \ninclude('header.php');\n?>\n",
+			"jwplayer",
+			"jwplayer.js",
+			"640",
+			"result",
+			"sendEvent",
+			"mpl",
+			"      \n",
+			"jwplayer()",
+			"doongji",
+			"button",
+			"url(",
+			".html",
+			"html",
+			"white",
+			"Rectan",
+			"tool",
+			"png",
+			"180",
+			"rand",
+			"img",
+			"ajax",
+			"white.",
+			"jcrop-link",
+			"capture-image",
+			"capture-image-id",
+			"capture-image",
+			"value",
+			"tools",
+			"order",
+			"desc",
+			"kind",
+			"label",
+			"value",
+			"source",
+			"type\nimageLoadTimer",
+			"type",
+			"submit",
+			"href",
+			"JavaScript",
+			"bottom",
+			"except",
+			"boston",
+			"form",
+			"caret",
+			"로그",
+			"로그인",
+			"odk-li",
+			"unit"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 144.0,
+	"status_bar_visible": true
+}

@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	imagecopy($dst_r,$img_r,0,0,$_POST['x'],$_POST['y'],$_POST['w'],$_POST['h']);
 
 	//header('Content-type: image/png');
-	$new_filename = $_POST['filepath'].'_crop.png';
+	$new_filename = substr($_POST['filepath'], 0, -4) . '_crop.png';
 	imagejpeg($dst_r, $new_filename, 100);
 	imagedestroy($dst_r);
 	echo $new_filename;
