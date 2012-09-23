@@ -22,7 +22,7 @@ if ($result->num_rows == 1){
 	$_SESSION["username"] = $myusername;
 	$_SESSION["is_admin"] = $user["is_admin"];
 	$_SESSION["uid"] = $user["id"];
-	header("location:tutorial.php");
+	header("location:intro.php");
 } else
 	echo "Username does not exist!";
 

@@ -3,6 +3,7 @@
 
 <script src="js/libs/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/libs/jquery-ui-1.8.22.custom.min.js"></script> 
+<script type="text/javascript" src="js/libs/jcrop/jquery.Jcrop.min.js"></script> 
 <script type="text/javascript" src="js/libs/jwplayer/jwplayer.js"></script>
 <script src="js/script.js"></script>
 <!--

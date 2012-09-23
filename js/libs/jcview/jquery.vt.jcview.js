@@ -34,7 +34,7 @@
 	        // Adding tabbed views
 	        var url = "browse.php?vid=" + label.video_id + "&uid=" + label.user_id + "&tm=" + label.tm;
 
-	        var thumb_html = "<a href='" + label.thumbnail + "'><img src='" + label.thumbnail + "?rand=" + Math.random() + "'></a>";
+	        var thumb_html = "<a class='lightbox' href='" + label.thumbnail + "'><img src='" + label.thumbnail + "?rand=" + Math.random() + "'></a>";
 	        var play_html = "<a class='seek btn' id='time" + label.tm + "'href='#'><i class='icon-play'></i></a>";
 
 	        if (label.comment == "#initial")
@@ -50,7 +50,7 @@
 	          control_html = control_html + "<a href='#' class='marker-image'>" + tm_formatted + "</a> ";
 	        } else {
 	          tabs3_html = tabs3_html + "<div class='browse-steps-tool'>(" + tm_formatted + ") &nbsp;" + play_html + "<br><b>" + label.tool + "</b></div>";
-	          tabs4_html = tabs4_html + "<li><b>" + label.tool + "</b></li>";
+	          tabs4_html = tabs4_html + "<li><div class='tool-display'>" + formatTool(label.tool, "toolname-emphasize") + "</div></li>";
 	          control_html = control_html + "<a href='#' class='marker-tool'>" + tm_formatted + "</a> ";
 	        }
         

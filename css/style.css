@@ -12,8 +12,84 @@
     ul { list-style-type:none; padding-left: 0px; margin: 0; }
     input { height: 25px; }
 
+.alert{
+    display: none;
+}
+
+img.intro-img {
+    max-width: 350px;
+    max-height: 250px;
+}
+
+img.intro-task-img {
+    max-width: 600px;
+    max-height: 400px;
+}
+
+/* Likert questions */
+
+textarea.comments {
+    width:auto !important;
+}
+
+.ss-formwidget-container {
+    position: relative;
+    padding: 1em;
+}
+
+.ss-q-title {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ss-q-help {
+    color: #666666;
+    display: block;
+    margin: 0.1em 0 0.25em;
+}
+
+.ss-q-table {
+    border-collapse: collapse;
+    border-width: 0;
+    empty-cells: show;
+}
+
+.ss-scalenumbers {
+    text-align: center;
+}
+
+.ss-scalerow {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #D3D8D3 -moz-use-text-color;
+    border-style: solid none;
+    border-width: 1px 0;
+    color: #666666;
+    padding: 0.5em;
+    text-align: center;
+}
+
+td.ss-leftlabel {
+    padding-left: 0;
+    text-align: right;
+}
+
+td.ss-rightlabel {
+    padding-right: 0;
+    text-align: left
+}
 
 /* list.php */
+
+    .tool-display { font-size: 0.8em;}
+
+    .tool-filter { font-size: 0.8em; }
+    .toolname-emphasize { font-weight: bold; font-size: 1.5em;}
+
     #filters h3 { margin: 0; padding: 0; }
     #results { /*margin:5px 0 15px 16px; padding:0; */ margin-top: 20px; list-style-type:none; }
     #results .row { padding-left: 20px; padding-bottom: 20px;}
@@ -22,7 +98,7 @@
     /*.video-item:after { clear:both; }*/
     /*.video-view { /*float:left; margin-right:15px; max-width: 200px; height: 150px; }*/
     /*.video-view a img { float:left; margin-right:15px; max-width: 200px; max-height: 150px;}*/
-    .video-info p { margin-left: 10px; }
+    /*.video-info p { margin-left: 10px; }*/
     .video-info-youtube h3, .video-info-google h3 { margin:0; }
     .video-meta { color: #777777;}
     .video-info-meta { padding-right: 15px; padding-top: 15px;}
@@ -87,9 +163,36 @@
         font-size: 24px;
     }
 
+    .select-simple-view{
+
+    }
+
+    .select-all-view{
+
+    }
+
+    .simple-view{
+        display:none;
+    }
+    
+    .all-view{
+
+    }
+
+    /* for better styling of popover tools */
+    .popover-click-tool {
+        font-size: 0.7em;
+    }    
+
+    .toolname-block{
+        font-weight: bold; 
+        font-size: 1.6em;
+        display:block;
+    }
+
 /* Timeline */
     #timeline {
-        padding-top: 90px;
+        padding-top: 100px;
         padding-bottom: 240px;
         clear: both;
         position: relative;
@@ -117,8 +220,32 @@
 
     #timeline-bottom {       
         height: 15px;
-        width: 800px;
+        width: 100%; /*800px;*/
         float: left;
+    }
+
+    .idle-marker{
+        background-color: #333333;
+        float:left;
+        height: 15px;
+        display: block;
+        position: absolute;    
+        z-index: 1;
+        opacity: 0.8;
+    }
+
+    .idle-marker-right{
+        -moz-border-radius-topright: 5px;
+        border-top-right-radius: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .idle-marker-left{
+        -moz-border-radius-topleft: 5px;
+        border-top-left-radius: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        border-bottom-left-radius: 5px;
     }
 
     .ui-slider-handle {
@@ -201,38 +328,113 @@
     }
 
 /* popover override */
-    .popover {
+    .vt-popover {
         width: auto !important;
+
+        background-clip: padding-box;
+        background-color: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px 6px 6px 6px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        display: none;
+        left: 0;
+        padding: 0px;
+        position: absolute;
+        top: 0;
+        /*width: 236px;*/
+        z-index: 1010;
+
     }
 
-    .popover-inner {
+    .vt-popover-inner {
         width: auto !important;
         /*width: 100px;*/
         height: auto !important;
     }
 
-    .popover-title {
+    .vt-popover-title {
+        display:none;
+
+/* VT override defaults
         font-size: 12px;
         border: none;
         padding: 3px;
-        display:none;
+*/        
+/* Bootstrap defaults
+        background-color: #F7F7F7;
+        border-bottom: 1px solid #EBEBEB;
+        border-radius: 5px 5px 0 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 18px;
+        margin: 0;
+        padding: 8px 14px;
+*/
     }
 
-    .popover-content {
+    .vt-popover-content {
         padding: 5px;
     }
 
+    .vt-popover.bottom .arrow:after {
+        border-bottom-color: rgba(0, 0, 0, 0.25);
+        border-width: 0 11px 11px;
+        left: -11px;
+        top: -1px;
+    }
+
+    .vt-popover.top .arrow:after {
+        border-top-color: rgba(0, 0, 0, 0.25);
+        border-width: 11px 11px 0;
+        bottom: -1px;
+        left: -11px;
+    }
+
+    .vt-popover .arrow:after {
+        content: "";
+        z-index: -1;
+    }
+
+    .vt-popover .arrow, .vt-popover .arrow:after {
+        border-color: transparent;
+        border-style: solid;
+        display: inline-block;
+        height: 0;
+        position: absolute;
+        width: 0;
+    }
+
+    .vt-popover.bottom .arrow {
+        border-bottom-color: #FFFFFF;
+        border-width: 0 10px 10px;
+        left: 50%;
+        margin-left: -10px;
+        top: -10px;
+    }
+
+    .vt-popover.top .arrow {
+        border-top-color: #FFFFFF;
+        border-width: 10px 10px 0;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -10px;
+    }
+
+    .vt-popover-content p { 
+        margin-bottom: 0; 
+    }
+
     .popover-image-top {
-        margin-top: 10px !important;
+        margin-top: 30px !important; /* 10 */
     }
     .popover-image-bottom {
-        margin-top: 110px !important;
+        margin-top: 130px !important; /* 110 */
     }
     .popover-tool-top {
-        margin-top: -40px !important;
+        margin-top: -100px !important; /* -40 */
     }
     .popover-tool-bottom {
-        margin-top: -10px !important;
+        margin-top: -55px !important; /* -10 */
     }
     .popover-highlight {
         background-color: #FFCC33;
@@ -256,4 +458,12 @@
 
     .jcarousel-skin-tango .jcarousel-container {
         background-color: #ffffff !important;
+    }
+    
+    .jcarousel-skin-tango .jcarousel-container-horizontal {
+        padding: 20px 40px;
+        width: 85% !important;
+    }
+    .jcarousel-skin-tango .jcarousel-clip-horizontal {
+        width: 100% !important;
     }

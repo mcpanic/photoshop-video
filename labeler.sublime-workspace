@@ -4,12 +4,64 @@
 		"selected_items":
 		[
 			[
-				"num",
-				"num_rows"
+				"video",
+				"videos_array"
+			],
+			[
+				"formatt",
+				"formatted_item"
+			],
+			[
+				"local",
+				"local_num_tools"
+			],
+			[
+				"local_",
+				"local_num_tools"
+			],
+			[
+				"ds",
+				"dsOursPostQuestions  (variable)"
+			],
+			[
+				"interfa",
+				"interface_id"
+			],
+			[
+				"done",
+				"domxml_new_doc"
+			],
+			[
+				"timeline-",
+				"timeline-bottom"
+			],
+			[
+				"num_",
+				"num_videos"
+			],
+			[
+				"int",
+				"interface_id"
 			],
 			[
 				"la",
-				"labels"
+				"labels_array"
+			],
+			[
+				"label",
+				"labels_array"
+			],
+			[
+				"lab",
+				"labels_array"
+			],
+			[
+				"edit-",
+				"edit-label-link"
+			],
+			[
+				"num",
+				"num_rows"
 			],
 			[
 				"ta",
@@ -43,13 +95,101 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "analyze-data.php",
+			"settings":
+			{
+				"buffer_size": 7290,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "analyze-comments.php",
+			"settings":
+			{
+				"buffer_size": 18550,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/juhokim/Desktop/vs-post.csv",
+			"settings":
+			{
+				"buffer_size": 1304,
+				"line_ending": "CR"
+			}
+		},
+		{
+			"file": "analyze-logs.php",
+			"settings":
+			{
+				"buffer_size": 15913,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "analyze-videos.php",
+			"settings":
+			{
+				"buffer_size": 8636,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vs-process.php",
+			"settings":
+			{
+				"buffer_size": 8168,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "study-conditions.php",
+			"settings":
+			{
+				"buffer_size": 6020,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/script.js",
+			"settings":
+			{
+				"buffer_size": 14288,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "list.php",
+			"settings":
+			{
+				"buffer_size": 18800,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<?php\n  session_start();\n  if(!isset($_SESSION[\"username\"])){\n    header(\"location:index.php\");\n  }\n\n  if (isset($_GET[\"tid\"]))\n    $task_id = $_GET[\"tid\"];\n  else\n    $task_id = 0;\n\n  if (isset($_GET[\"iid\"]))\n    $interface_id = $_GET[\"iid\"];\n  else\n    $interface_id = 1;\n\n  include \"conn.php\";\n  \n  if ($task_id == 0)\n    $result1 = $mysqli->query(\"SELECT * FROM videos\");\n  else {\n    $result1 = $mysqli->query(\"SELECT * FROM videos WHERE task_id='$task_id'\");\n    $result2 = $mysqli->query(\"SELECT * FROM tasks WHERE id='$task_id'\");\n    $task = $result2->fetch_assoc();\n  }\n\n  $videos_array = array();\n  $labels_array = array();\n  $meta_array = array();\n\n  while ($video = $result1->fetch_assoc()) {\n    $video_filename = $video['filename'];\n    $string = file_get_contents(\"video/$video_filename.info.json\");\n    $json = json_decode($string, true);\n\n    $result3 = $mysqli->query(\"SELECT * FROM labels WHERE video_id = '\" . $video['id'] . \"'\");    \n    $label_array = array();\n    // $html = \"\";\n    while ($label = $result3->fetch_assoc()) {\n      $label_array[] = $label;  \n    }\n\n    $labels_array[] = $label_array;\n    $videos_array[] = $video;\n    $meta_array[] = $json;\n  } \n\n  if ($task_id == 0)\n    $result4 = $mysqli->query(\"SELECT count(distinct videos.id) AS freq, tool FROM labels, videos WHERE labels.video_id=videos.id AND tool<>'' GROUP BY tool ORDER BY freq DESC LIMIT 7\");\n  else\n    $result4 = $mysqli->query(\"SELECT count(distinct videos.id) AS freq, tool FROM labels, videos WHERE labels.video_id=videos.id AND tool<>'' AND videos.task_id='$task_id' GROUP BY tool ORDER BY freq DESC LIMIT 7\");\n//    $result4 = $mysqli->query(\"SELECT count(*) AS freq, tool FROM labels, videos WHERE labels.video_id=videos.id AND tool<>'' AND videos.task_id='$task_id' GROUP BY tool ORDER BY freq DESC LIMIT 7\");\n\n  $tools_array = array();\n  while ($tool = $result4->fetch_assoc()) {\n    $tools_array[] = $tool;\n  }\n\ninclude('header.php');\n?>\n\n  <div class=\"row\">\n    <h1 class=\"span12\" id=\"title\"></h1>\n    <div id=\"stats\" class=\"span4\"></div>\n  </div>\n\n  <form id=\"myForm\" action=\"vs-process.php\" method=\"POST\">\n\n<ol id=\"results\" class=\"list-striped list-hover\"></ol>\n\n\n    <div class=\"alert alert-block alert-error fade in\">\n      <button type=\"button\" class=\"close\" data-dismiss=\"alert\">Ă</button>\n      <h4 class=\"alert-heading\">Please answer all the questions.</h4>\n    </div>\n  <br>\n  <button id=\"nextButton\" class=\"btn btn-large btn-primary\" type=\"submit\">\n    NEXT\n  </button>\n  </form>\n\n\n</div><!--container-->\n\n<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\"></script>\n<script>window.jQuery || document.write('<script src=\"js/libs/jquery-1.7.2.min.js\"><\\/script>')</script>\n\n<script src=\"js/libs/bootstrap/bootstrap.min.js\"></script>\n<script type=\"text/javascript\" src=\"js/libs/jquery-ui-1.8.22.custom.min.js\"></script> \n<script type=\"text/javascript\" src=\"js/libs/jwplayer/jwplayer.js\"></script>\n<script type=\"text/javascript\" src=\"js/libs/jcarousel/jquery.jcarousel.min.js\"></script>\n\n<script src=\"js/libs/jcview/jquery.vt.jcview.js\"></script>\n<script src=\"js/libs/log4javascript.js\"></script>\n<script type=\"text/javascript\" src=\"js/libs/lightbox/jquery.lightbox-0.5.js\"></script>\n\n<script src=\"js/script.js\"></script>\n\n<script type=\"text/javascript\">    \n\n  $(document).ready(function() {\n    $(\".alert\").hide();\n\n    var input = $(\"<input>\").attr(\"type\", \"hidden\").attr(\"name\", \"part\").val(\"<?php echo $_GET['part'];?>\");\n    $('#myForm').append($(input));\n    var input = $(\"<input>\").attr(\"type\", \"hidden\").attr(\"name\", \"cond\").val(\"<?php echo $_GET['cond'];?>\");\n    $('#myForm').append($(input));\n    var input = $(\"<input>\").attr(\"type\", \"hidden\").attr(\"name\", \"step\").val(\"<?php echo $_GET['step'];?>\");\n    $('#myForm').append($(input));\n    var input = $(\"<input>\").attr(\"type\", \"hidden\").attr(\"name\", \"from\").val(\"<?php echo $_SERVER['PHP_SELF'];?>\");\n    $('#myForm').append($(input));\n\n    $(\"#myForm\").submit(function(){\n      $(\".alert\").hide();\n      var radio_groups = {};\n      $(\":radio\").each(function(){\n          radio_groups[this.name] = true;\n      });\n      for(group in radio_groups){\n        if_checked = !!$(\":radio[name='\"+group+\"']:checked\").length;\n        if (!if_checked) {\n          $(\".alert\").show();\n          //console.log(group+(if_checked?' has checked radios':' does not have checked radios'));\n          return false;\n        }\n      }\n    });\n\n\n/* Code for injecting random values to all radio buttons*/\n/*\nvar radio_groups = {}\n$(\":radio\").each(function(){\n    radio_groups[this.name] = true;\n});\nfor(group in radio_groups){\n  var val = Math.floor(Math.random() * 7);\n  $(\":radio[name='\"+group+\"']:nth(\"+val+\")\").attr(\"checked\", true);\n};\n*/\n\n      // Nav bar activation\n      var task_id = <?php echo $task_id; ?>;\n      var interface_id = <?php echo $interface_id; ?>;\n      var is_admin = <?php echo $_SESSION[\"is_admin\"]; ?>;\n      //console.log(is_admin, !is_admin, (is_admin == true), (is_admin == false));      \n      var log = log4javascript.getDefaultLogger();\n      var ajaxAppender = new log4javascript.AjaxAppender(\"ajax-add-log.php\");\n      log.addAppender(ajaxAppender);\n\n      var num_videos = <?php echo $result1->num_rows; ?>;\n      var labels_array = <?php echo json_encode($labels_array); ?>;\n      var videos_array = <?php echo json_encode($videos_array); ?>;\n      var tools_array = <?php echo json_encode($tools_array); ?>;\n      var meta_array = <?php echo json_encode($meta_array); ?>;      \n      var num_labels = 0;\n      var filters = [];\n\n      // Setting the page title\n      var cond = <?php echo $_GET[\"cond\"]; ?>;\n      if (cond > 0)\n        $(\"#task-selector li\").eq(cond).addClass(\"active\");\n\n      if (task_id == 0){\n        $(\"#title\").html(\"Showing all videos\");\n      } else {        \n        $(\"#title\").html(\"<?php echo $task['name'];?>\");\n      }\n\n      // Add video entries for each interface\n      $.each(videos_array, function(index, value){\n        var input = $(\"<input>\").attr(\"type\", \"hidden\").attr(\"name\", \"vid\" + index).val(this.id);\n        $('#myForm').append($(input));\n\n        var params = \"?vid=\" + this.id + \"&iid=\" + interface_id;\n        if (interface_id == 1) {\n          num_labels = num_labels + labels_array[index].length;\n          var html2 = \"\";\n          if (is_admin)\n            html2 = \"<p class='video-info-meta pull-right'><a href='label.php\" + params + \"'>(Label)</a></p>\";\n\n          //$title = $(\"<h3/>\").addClass(\"span8\").append(\"<a href='browse.php\" + params + \"'>\" + this.title + \"</a>\");\n          //$title = $(\"<h3/>\").addClass(\"span8\").append(this.title);\n          //$desc = $(\"<div/>\").addClass(\"span8\").append(meta_array[index].description);\n          //$detail = $(\"<div/>\").addClass(\"span3\").append(\"<p class='pull-right video-info-meta'>\" + getTimeDisplay(this.duration) + \" | \" + labels_array[index].length + \" labels</p>\" + html2);\n          //$info = $(\"<div/>\").addClass(\"video-info row\").append($title).append($detail).append($desc);\n          $info = $(\"<div/>\").addClass(\"video-info row\");//.append($title);\n          $view = $(\"<div/>\").addClass(\"row\").append(\"<div class='video-view span12'></div>\");\n          $likert = $(\"<div/>\").addClass(\"row\").append(\"<div class='video-likert span12'>\" + likert.getVSVideoHTML(index) + \"</div>\");\n          $item = $(\"<div/>\").addClass(\"video-item\").append($info).append($view).append($likert);\n          $(\"<li/>\").data(\"video_id\", this.id).append($item).appendTo(\"#results\");\n        } else if (interface_id == 2) {\n\n          num_labels = num_labels + labels_array[index].length;\n          var html2 = \"\";\n          if (is_admin)\n            html2 = \"<p class='video-info-meta pull-right'><a href='label.php\" + params + \"'>(Label)</a></p>\";\n\n          //$title = $(\"<h3/>\").addClass(\"span8\").append(\"<a href='browse.php\" + params + \"'>\" + this.title + \"</a>\");\n          //$title = $(\"<h3/>\").addClass(\"span8\").append(this.title);\n          //$desc = $(\"<div/>\").addClass(\"span8\").append(meta_array[index].description);\n          //$detail = $(\"<div/>\").addClass(\"span3\").append(\"<p class='pull-right video-info-meta'>\" + getTimeDisplay(this.duration) + \" | \" + labels_array[index].length + \" labels</p>\" + html2);\n          //$info = $(\"<div/>\").addClass(\"video-info row\").append($title).append($detail).append($desc);\n          $info = $(\"<div/>\").addClass(\"video-info row\");//.append($title);\n          $view = $(\"<div/>\").addClass(\"row\").append(\"<div class='video-view span12'><div id='mediaplayer\" + index + \"'></div></div>\");\n          $likert = $(\"<div/>\").addClass(\"row\").append(\"<div class='video-likert span12'>\" + likert.getVSVideoHTML(index) + \"</div>\");\n          $item = $(\"<div/>\").addClass(\"video-item\").append($info).append($view).append($likert);\n          $(\"<li/>\").data(\"video_id\", this.id).append($item).appendTo(\"#results\");\n\n        } else if (interface_id == 3) {\n          num_labels = num_labels + labels_array[index].length;\n          var html2 = \"\";\n          if (is_admin)\n            html2 = \"<p class='video-info-meta pull-right'><a href='label.php\" + params + \"'>(Label)</a></p>\";\n\n          //$title = $(\"<h3/>\").addClass(\"span8\").append(\"<a href='browse.php\" + params + \"'>\" + this.title + \"</a>\");\n          //$title = $(\"<h3/>\").addClass(\"span8\").append(this.title);\n          //$desc = $(\"<div/>\").addClass(\"span8\").append(meta_array[index].description);\n          //$detail = $(\"<div/>\").addClass(\"span3\").append(\"<p class='pull-right video-info-meta'>\" + getTimeDisplay(this.duration) + \" | \" + labels_array[index].length + \" labels</p>\" + html2);\n          //$info = $(\"<div/>\").addClass(\"video-info row\").append($title).append($detail).append($desc);\n          $info = $(\"<div/>\").addClass(\"video-info row\");//.append($title);\n          $view = $(\"<div/>\").addClass(\"row\").append(\"<div class='video-view span12'><div id='mediaplayer\" + index + \"'></div></div>\");\n          $likert = $(\"<div/>\").addClass(\"row\").append(\"<div class='video-likert span12'>\" + likert.getVSVideoHTML(index) + \"</div>\");\n          $item = $(\"<div/>\").addClass(\"video-item\").append($info).append($view).append($likert);\n          $(\"<li/>\").data(\"video_id\", this.id).append($item).appendTo(\"#results\");\n   \n        }\n      });\n\n      // Display statistics\n      $(\"#stats\").html(\"Total: \" + num_videos + \" videos\");\n\n/* From here, VT Browser ONLY */\n      \n      // for each result entry, display a slideshow summary\n      $(\".video-view\").each(function(index){\n        //console.log(videos_array[index].duration);\n        if (interface_id == 1){\n          $(this).jcview({\n            labels: labels_array[index], \n            duration: videos_array[index].duration\n          });\n        } else if (interface_id == 2){\n          var filename = \"video/ff/\" + videos_array[index].filename + \".flv\";\n          if (jwplayer(\"mediaplayer\" + index) != null){\n            jwplayer(\"mediaplayer\" + index).setup({\n              flashplayer: \"js/libs/jwplayer/player.swf\",\n              width: \"400\",\n              height: \"250\",\n              controlbar: \"bottom\",\n              file: filename,\n              image: meta_array[index].thumbnail\n            });\n          }\n        } else if (interface_id == 3){\n          var filename = \"video/sc/\" + videos_array[index].filename + \".flv\";\n          if (jwplayer(\"mediaplayer\" + index) != null){\n            jwplayer(\"mediaplayer\" + index).setup({\n              flashplayer: \"js/libs/jwplayer/player.swf\",\n              width: \"400\",\n              height: \"250\",\n              controlbar: \"bottom\",\n              file: filename,\n              image: meta_array[index].thumbnail\n            });\n          }\n        }\n      });\n\n\n/*\n      function mycarousel_initCallback(carousel) {\n        $('.jcarousel-control a').click(function() {\n          carousel.scroll($.jcarousel.intval($('.jcarousel-control a').index($(this))));\n          return false;\n        });\n      }\n*/\n      $(\".mycarousel\").jcarousel({\n        scroll: 2,\n        visible: 11//,\n        //initCallback: mycarousel_initCallback\n      });\n\n\n      // lightbox init\n      $(\"a.lightbox\").lightBox();\n  });\n</script>\n\n<!--\n<script>\n  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];\n  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\n  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';\n  s.parentNode.insertBefore(g,s)}(document,'script'));\n</script>\n-->\n</body>\n</html>\n",
+			"file": "vs-list.php",
+			"file_size": 12492,
+			"file_write_time": 1347995347000000,
+			"settings":
+			{
+				"buffer_size": 12492,
+				"line_ending": "Unix",
+				"scratch": true
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 307.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
 			[
 				"inst",
 				"Package Control: Install Package"
@@ -75,7 +215,7 @@
 				"Package Control: Enable Package"
 			]
 		],
-		"width": 575.0
+		"width": 602.0
 	},
 	"console":
 	{
@@ -92,9 +232,74 @@
 	},
 	"file_history":
 	[
-		"/Applications/MAMP/htdocs/labeler/README",
+		"/Users/juhokim/Desktop/data.csv",
+		"/Applications/MAMP/htdocs/labeler/vs-list.php",
+		"/Applications/MAMP/htdocs/labeler/vs-watch.php",
+		"/Applications/MAMP/htdocs/labeler/logout.php",
+		"/Applications/MAMP/htdocs/labeler/ajax-add-log.php",
+		"/Applications/MAMP/htdocs/labeler/list.php",
+		"/Applications/MAMP/htdocs/labeler/header.php",
+		"/Applications/MAMP/htdocs/labeler/vs-intro.php",
+		"/Applications/MAMP/htdocs/labeler/vs-intro-t.php",
+		"/Applications/MAMP/htdocs/labeler/intro-task.php",
+		"/Applications/MAMP/htdocs/labeler/conn.php",
+		"/Applications/MAMP/htdocs/labeler/study-conditions.php",
+		"/Applications/MAMP/htdocs/labeler/manage.php",
+		"/Applications/MAMP/htdocs/labeler/browse.php",
+		"/Applications/MAMP/htdocs/labeler/add-label.php",
+		"/Applications/MAMP/htdocs/labeler/css/style.css",
+		"/Applications/MAMP/htdocs/labeler/done.php",
+		"/Applications/MAMP/htdocs/labeler/js/script.js",
+		"/Applications/MAMP/htdocs/labeler/vt.sql",
+		"/Applications/MAMP/htdocs/labeler/vs-intro-i.php",
+		"/Applications/MAMP/htdocs/labeler/tutorial.php",
+		"/Applications/MAMP/htdocs/labeler/vs-process.php",
+		"/Applications/MAMP/htdocs/labeler/postq.php",
+		"/Users/juhokim/Documents/패치 정보.txt",
+		"/Applications/MAMP/htdocs/labeler/js/libs/jcview/jquery.vt.jcview.js",
+		"/Applications/MAMP/htdocs/labeler/test.php",
+		"/Applications/MAMP/htdocs/labeler/video/sc/sc.sh",
+		"/Applications/MAMP/htdocs/labeler/vs-post-questionnaire.php",
+		"/Applications/MAMP/htdocs/labeler/preq.php",
+		"/Applications/MAMP/htdocs/labeler/menus.json",
+		"/Applications/MAMP/htdocs/labeler/vs-done.php",
+		"/Applications/MAMP/htdocs/labeler/intro.php",
+		"/Applications/MAMP/htdocs/labeler/design-intro.php",
+		"/Applications/MAMP/htdocs/labeler/utils.php",
+		"/Users/juhokim/Library/Application Support/Sublime Text 2/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/Applications/MAMP/htdocs/labeler/img/tasks/retro.jpg",
+		"/Applications/MAMP/htdocs/labeler/create-summary.php",
+		"/Applications/MAMP/htdocs/labeler/finish.php",
+		"/Applications/MAMP/htdocs/labeler/get-video-duration.php",
+		"/Applications/MAMP/htdocs/labeler/video/ff/ff.sh",
+		"/Applications/MAMP/htdocs/labeler/tools.json",
+		"/Applications/MAMP/htdocs/labeler/save-video-metadata.php",
+		"/Applications/MAMP/htdocs/labeler/video/7z5YKi5cizA.flv.info.json",
 		"/Applications/MAMP/htdocs/labeler/index.php",
+		"/Applications/MAMP/htdocs/labeler/check-login.php",
+		"/Applications/MAMP/htdocs/labeler/js/libs/lightbox/jquery.lightbox-0.5.js",
+		"/Applications/MAMP/htdocs/labeler/label.php",
+		"/Applications/MAMP/htdocs/labeler/css/lightbox/jquery.lightbox-0.5.css",
+		"/Applications/MAMP/htdocs/labeler/footer.php",
+		"/Applications/MAMP/htdocs/labeler/js/libs/bootstrap/bootstrap.js",
+		"/Applications/MAMP/htdocs/labeler/update-label.php",
+		"/Applications/MAMP/htdocs/labeler/list-commands.php",
+		"/Applications/MAMP/htdocs/labeler/js/libs/jcview/jquery.jcview.css",
+		"/Applications/MAMP/htdocs/odk2/header.php",
+		"/Applications/MAMP/htdocs/labeler/js/script.labeler.js",
+		"/Applications/MAMP/htdocs/labeler/autocomplete.php",
+		"/Applications/MAMP/htdocs/labeler/labeler.php",
+		"/Applications/MAMP/htdocs/labeler/browser.php",
+		"/Applications/MAMP/htdocs/labeler/jcrop.php",
+		"/Applications/MAMP/htdocs/labeler/delete-label.php",
+		"/Users/juhokim/Music/Swings - Punchline King III 2012/Punchline King III Official Mixtape.txt",
+		"/Users/juhokim/Music/Swings - Punchline King III 2012/Lyrics/¡¯¬• ∏⁄¿Ô¿Ã feat. Wutan, Deepflow.txt",
+		"/Applications/MAMP/htdocs/labeler/log.php",
+		"/Applications/MAMP/htdocs/labeler/ajax-make-thumbnail.php",
+		"/Applications/MAMP/htdocs/labeler/js/libs/log4javascript.js",
+		"/Applications/MAMP/htdocs/labeler/test.html",
 		"/Applications/MAMP/htdocs/labeler/js/libs/jcview/jquery.jcview.js",
+		"/Applications/MAMP/htdocs/labeler/README",
 		"/Applications/MAMP/htdocs/labeler/js/libs/jcview/jquery-jcview-0.0.1.min.js",
 		"/Applications/MAMP/htdocs/labeler/index.html",
 		"/Applications/MAMP/htdocs/odk2/css/custom.css",
@@ -116,26 +321,14 @@
 		"/Applications/MAMP/htdocs/odk2/_news.php",
 		"/Applications/MAMP/htdocs/odk2/index.php",
 		"/Applications/MAMP/htdocs/odk2/mask.php",
-		"/Applications/MAMP/htdocs/odk2/header.php",
 		"/Applications/MAMP/htdocs/odk2/footer.php",
 		"/Applications/MAMP/htdocs/odk2/juwon.php",
 		"/Applications/MAMP/htdocs/odk2/css/style.css",
-		"/Applications/MAMP/htdocs/labeler/labeler.php",
-		"/Applications/MAMP/htdocs/labeler/tools.json",
-		"/Applications/MAMP/htdocs/labeler/menus.json",
-		"/Applications/MAMP/htdocs/labeler/header.php",
-		"/Applications/MAMP/htdocs/labeler/css/style.css",
 		"/Applications/MAMP/htdocs/labeler/css/jcarousel/skins/tango/skin.css",
-		"/Applications/MAMP/htdocs/labeler/add-label.php",
-		"/Applications/MAMP/htdocs/labeler/js/script.js",
-		"/Applications/MAMP/htdocs/labeler/get-video-duration.php",
-		"/Applications/MAMP/htdocs/labeler/browser.php",
 		"/Applications/MAMP/htdocs/labeler/make-thumbnail.php",
-		"/Applications/MAMP/htdocs/labeler/ajax-make-thumbnail.php",
 		"/Applications/MAMP/htdocs/labeler/js/jcarousel/examples/static_controls.html",
 		"/Applications/MAMP/htdocs/labeler/css/jcarouosel/style.css",
 		"/Applications/MAMP/htdocs/labeler/video/85WjLBsJVjc.flv.info.json",
-		"/Applications/MAMP/htdocs/labeler/footer.php",
 		"/Users/juhokim/Downloads/initializr-verekia-3.0/css/style.css",
 		"/Users/juhokim/Downloads/initializr-verekia-3.0/js/script.js",
 		"/Applications/MAMP/htdocs/labeler/motionblur.php",
@@ -148,8 +341,6 @@
 		"/Users/juhokim/Sites/odk2/index.html",
 		"/Users/juhokim/Sites/odk2/login.html",
 		"/Users/juhokim/Sites/photoshop-video/20120416-prototype/retro.html",
-		"/Applications/MAMP/htdocs/labeler/autocomplete.php",
-		"/Applications/MAMP/htdocs/labeler/jcrop.php",
 		"/Applications/MAMP/htdocs/labeler/7z5YKi5cizA.flv.info.json",
 		"/Applications/MAMP/htdocs/labeler/crop-icons.sh",
 		"/Applications/MAMP/htdocs/labeler/youtube-download.sh",
@@ -168,20 +359,11 @@
 		"/Applications/MAMP/htdocs/labeler/ndfm-esLqFs.mp4.info.json",
 		"/Applications/MAMP/htdocs/labeler/E3-fKp7sTls.flv.info.json",
 		"/Applications/MAMP/htdocs/labeler/E3-fKp7sTls.flv.description",
-		"/Applications/MAMP/htdocs/labeler/video/t8sTxPBtt8A.mp4.info.json",
-		"/Applications/MAMP/htdocs/labeler/youtube-dl.py",
-		"/Users/juhokim/Sites/photoshop-video/20120416-prototype/motionblur.html",
-		"/Applications/MAMP/htdocs/labeler/js/tapmodo-Jcrop-25f2e18/README.md",
-		"/Applications/MAMP/htdocs/labeler/js/tapmodo-Jcrop-25f2e18/demos/crop.php",
-		"/Users/juhokim/Sites/odk2/js/libs/jwplayer/readme.html",
-		"/Users/juhokim/Sites/wedding/header.shtml",
-		"/Users/juhokim/Sites/wedding/index.html",
-		"/Users/juhokim/Sites/odk2/css/style.css",
-		"/Users/juhokim/Sites/bootstrap/index.html"
+		"/Applications/MAMP/htdocs/labeler/video/t8sTxPBtt8A.mp4.info.json"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
@@ -193,9 +375,118 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"num_videos",
+			"meta_array",
+			"getIDisplay",
+			"index",
+			"<?",
+			"mediaplayer",
+			"html2",
+			"video_id",
+			"lightbox",
+			"seek",
+			"seek(",
+			"jwplayer",
+			"popover-click-image",
+			"marker-image",
+			"timeline",
+			"popover-tool-bo",
+			"popover-click",
+			"dues",
+			"mycarousel",
+			"date",
+			"filters",
+			"list.php",
+			".alert",
+			"video_filename",
+			"result2",
+			"active",
+			"lightbox",
+			"lightBox",
+			"duplicate",
+			"labels",
+			"$json",
+			"images",
+			"getLikertQuestionHTML",
+			"task_id",
+			"The provided video summary",
+			"File > New",
+			"edit-save-link",
+			"edit-cancel-link",
+			"selector",
+			"popover",
+			"slider",
+			"jwplayer",
+			"popover-click-image",
+			"footer",
+			"jcrop",
+			"videos_array",
+			"result1",
+			"seek",
+			"mycarousel_initCallback",
+			"control_width",
+			"width",
+			"duration",
+			"interface_id",
+			"tools_array",
+			"user_id",
+			"#tm",
+			"select-other",
+			"select-image",
+			"select-other",
+			"id=\"select-other\"",
+			"id=\"select-menu\"",
+			"id=\"select-tool\"",
+			"id=\"select-image\"",
+			"capture-tool",
+			"select-image",
+			"checked",
+			"selection",
+			"select-image",
+			"capture-tool",
+			"checked",
+			"select-tool",
+			"pull-right",
+			"play-button",
+			"tool-id",
+			"carousel",
+			"user_id",
+			"labeler",
+			"browser",
+			"$row",
+			"Repousse",
+			"Adjustments",
+			"<?",
+			"video_id",
+			"getLabelByID",
+			"getEditHTML",
+			"Math.random()",
+			"jcrop",
+			"highlight",
+			"jcrop-link",
+			"getLabelByID",
+			"select-image",
+			"selection",
+			"getEditHTML",
+			"javascript:",
+			"video_filename",
+			"$json",
+			"video_filename",
+			"$row",
+			"<?",
+			"imageLoadTimer",
+			"$labels",
+			"tools_array",
+			"result2",
+			"$url",
+			"labels",
+			"mycarousel",
+			"duration",
+			"<?",
+			"json",
 			"icon-star",
 			"jwplayer()",
 			"display",
@@ -214,59 +505,7 @@
 			"val",
 			"playhead",
 			"900",
-			"playhead",
-			"getTime",
-			"900",
-			"jump",
-			"\n<?php \ninclude('header.php');\n?>\n",
-			"jwplayer",
-			"jwplayer.js",
-			"640",
-			"result",
-			"sendEvent",
-			"mpl",
-			"      \n",
-			"jwplayer()",
-			"doongji",
-			"button",
-			"url(",
-			".html",
-			"html",
-			"white",
-			"Rectan",
-			"tool",
-			"png",
-			"180",
-			"rand",
-			"img",
-			"ajax",
-			"white.",
-			"jcrop-link",
-			"capture-image",
-			"capture-image-id",
-			"capture-image",
-			"value",
-			"tools",
-			"order",
-			"desc",
-			"kind",
-			"label",
-			"value",
-			"source",
-			"type\nimageLoadTimer",
-			"type",
-			"submit",
-			"href",
-			"JavaScript",
-			"bottom",
-			"except",
-			"boston",
-			"form",
-			"caret",
-			"로그",
-			"로그인",
-			"odk-li",
-			"unit"
+			"playhead"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -284,8 +523,298 @@
 	"groups":
 	[
 		{
+			"selected": 6,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "analyze-data.php",
+					"settings":
+					{
+						"buffer_size": 7290,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2739,
+								2694
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2745.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "analyze-comments.php",
+					"settings":
+					{
+						"buffer_size": 18550,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9903,
+								9903
+							]
+						],
+						"settings":
+						{
+							"is_preview": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3185.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/juhokim/Desktop/vs-post.csv",
+					"settings":
+					{
+						"buffer_size": 1304,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								974,
+								974
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "analyze-logs.php",
+					"settings":
+					{
+						"buffer_size": 15913,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								15913
+							]
+						],
+						"settings":
+						{
+							"is_preview": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4528.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "analyze-videos.php",
+					"settings":
+					{
+						"buffer_size": 8636,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5436,
+								5436
+							]
+						],
+						"settings":
+						{
+							"is_preview": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2192.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "vs-process.php",
+					"settings":
+					{
+						"buffer_size": 8168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5835,
+								5835
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2655.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "study-conditions.php",
+					"settings":
+					{
+						"buffer_size": 6020,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1486,
+								1486
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1797.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "js/script.js",
+					"settings":
+					{
+						"buffer_size": 14288,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4705,
+								4705
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1333.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "list.php",
+					"settings":
+					{
+						"buffer_size": 18800,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10436,
+								6487
+							]
+						],
+						"settings":
+						{
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5760.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "vs-list.php",
+					"settings":
+					{
+						"buffer_size": 12492,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12034,
+								12034
+							]
+						],
+						"settings":
+						{
+							"in_converting": true,
+							"origin_encoding": "ISO-8859-2",
+							"revert_to_scratch": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3604.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -295,7 +824,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -330,6 +859,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"conn",
+				"conn.php"
+			]
 		],
 		"width": 0.0
 	},
@@ -345,6 +878,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 144.0,
+	"side_bar_width": 272.0,
 	"status_bar_visible": true
 }

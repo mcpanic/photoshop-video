@@ -225,7 +225,7 @@
       },
       {
         "value": "file-share_my_screen",
-        "label": "File > New",
+        "label": "File > Share My Screen",
         "kind": "File",
         "desc": "",
         "level": "2",
@@ -1558,7 +1558,15 @@
         "desc": "",
         "level": "2",
         "icon": "white.png"
-      },                      
+      },    
+      {
+        "value": "layer-duplicate_layer",
+        "label": "Layer > Duplicate Layer",
+        "kind": "Layer",
+        "desc": "",
+        "level": "2",
+        "icon": "white.png"
+      },                          
       {
         "value": "layer-delete",
         "label": "Layer > Delete",

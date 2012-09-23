@@ -3,7 +3,12 @@
 $tm = mysql_real_escape_string($_POST["tm"]);
 $filepath = mysql_real_escape_string($_POST["filepath"]);
 
-$url = "localhost:8888/labeler/make-thumbnail.php";
+$path_parts = pathinfo($_SERVER["SCRIPT_NAME"]);
+//echo $path_parts['dirname'], "\n";
+
+$url = $_SERVER['HTTP_HOST'] . $path_parts['dirname'] . "/make-thumbnail.php";
+
+//$url = "localhost:8888/labeler/make-thumbnail.php";
 $fields = "filepath=" . $_POST['filepath'] . "&tm=" . $tm;
 //$fields = "filepath=$_POST['filepath']" . "&tm=$tm";
 

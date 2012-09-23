@@ -1,5 +1,9 @@
+img/thumbnails/*
+video/*
 video/*.flv
 video/*.mp4
 video/*.json
+video/ff/*.flv
+video/sc/*.flv
 ext_ffmpeg_20050221.rar
 ffmpeg*

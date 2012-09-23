@@ -1,3 +1,26 @@
+<?php
+include "study-conditions.php";
+
+$part1_1 = "vs-intro-i.php?part=1&step=intro-i&cond=1" . 
+  "&tid=" . $user_condition[$_SESSION["username"]]["cond1"]["tid"] .
+  "&iid=" . $user_condition[$_SESSION["username"]]["cond1"]["iid"];
+$part1_2 = "vs-intro-i.php?part=1&step=intro-i&cond=2" . 
+  "&tid=" . $user_condition[$_SESSION["username"]]["cond2"]["tid"] .
+  "&iid=" . $user_condition[$_SESSION["username"]]["cond2"]["iid"];  
+$part1_3 = "vs-intro-i.php?part=1&step=intro-i&cond=3" . 
+  "&tid=" . $user_condition[$_SESSION["username"]]["cond3"]["tid"] .
+  "&iid=" . $user_condition[$_SESSION["username"]]["cond3"]["iid"];  
+
+$part2_1 = "tutorial.php?part=2&step=tutorial&cond=A";
+$part2_2 = "tutorial.php?part=2&step=tutorial&cond=B";  
+
+//$part1_2 = 
+//$part1_3 =
+//$part2_1 =
+//$part2_2 =
+
+?>
+
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -18,6 +41,7 @@
   <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.22.custom.css" type="text/css" />
   <link rel="stylesheet" href="css/jcrop/jquery.Jcrop.css" type="text/css" />  
   <link rel="stylesheet" type="text/css" href="css/jcarousel/skins/tango/skin.css" />
+  <link rel="stylesheet" type="text/css" href="css/lightbox/jquery.lightbox-0.5.css" media="screen" />
   <link rel="stylesheet" href="css/style.css">
 
   <script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
@@ -34,13 +58,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="list.php">Tutorial Video Browser</a>
+          <a class="brand" href="intro.php">Tutorial Video Browser</a>
           <div class="nav-collapse">
             <ul class="nav" id="task-selector">
+              <!--
               <li><a href="tutorial.php">Tutorial</a></li>
               <li><a href="list.php?tid=1">Task 1</a></li>
               <li><a href="list.php?tid=2">Task 2</a></li>
-              <li><a href="list.php?tid=3">Task 3</a></li>              
+              <li><a href="list.php?tid=3">Task 3</a></li>       
+              -->
+              <li><a href="vs-intro.php?part=1&step=intro&cond=1">Part 1 Intro</a></li>
+              <li><a href="<?php echo $part1_1;?>">Part 1-1</a></li>
+              <li><a href="<?php echo $part1_2;?>">Part 1-2</a></li>
+              <li><a href="<?php echo $part1_3;?>">Part 1-3</a></li>
+              <li><a href="design-intro.php?part=2&step=intro&cond=A">Part 2 Intro</a></li>
+              <li><a href="<?php echo $part2_1;?>">Part 2-1</a></li>
+              <li><a href="<?php echo $part2_2;?>">Part 2-2</a></li>       
             </ul>
             <ul class="nav pull-right">
               <li class="divider-vertical"></li>

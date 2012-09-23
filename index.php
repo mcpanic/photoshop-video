@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Video Tutorial Browser</title>
+  <title>Video Tutorials Study</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -25,7 +25,7 @@
 <body>
 <div class="container">
 <div class="row">
-	<h1 class="offset3">Video Tutorial Browser</h1>
+	<h1 class="offset3">Video Tutorials Study</h1>
 	<div class="offset2">
 		<form class="form-horizontal" name="form1" method="post" action="check-login.php">	
 		<div class="control-group">	

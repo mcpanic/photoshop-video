@@ -18,9 +18,12 @@
   
   if ($task_id == 0)
     $result1 = $mysqli->query("SELECT * FROM videos");
-  else
+  else {
     $result1 = $mysqli->query("SELECT * FROM videos WHERE task_id='$task_id'");
- 
+    $result2 = $mysqli->query("SELECT * FROM tasks WHERE id='$task_id'");
+    $task = $result2->fetch_assoc();
+  }
+
   $videos_array = array();
   $labels_array = array();
   $meta_array = array();
@@ -58,7 +61,15 @@ include('header.php');
 
 <?php if ($interface_id == 1) { ?>
   <div class="row">
-    <h1 class="span12" id="title"></h1>
+    <h1 class="span9" id="title"></h1>
+    <div class="span3">
+      <form id="myForm" action="vs-process.php" method="POST">
+        Done with the task?
+        <button id="nextButton" class="btn btn-large btn-primary" type="submit">
+          NEXT
+        </button>
+      </form>
+    </div>
     <div class="span4">
       <div id="stats"></div>
       <div>
@@ -67,13 +78,27 @@ include('header.php');
         </div>
       </div> 
     </div>
-    <div id="filters" class="span8 filters"><h3>Top tools</h3></div>
+    <div id="filters" class="span6 filters"><h3>Top tools</h3></div>
+    <div id="views" class="span2">
+      <h3>Views</h3>
+      <input type="radio" name="view-option" value="all" checked>&nbsp;&nbsp;All<br>
+      <input type="radio" name="view-option" value="simple">&nbsp;&nbsp;Simple
+    </div>
   </div>
 
 <?php } elseif ($interface_id == 2) { ?>
 
   <div class="row">
-    <h1 class="span12" id="title"></h1>
+    <h1 class="span9" id="title"></h1>
+      <div class="span3">
+    <form id="myForm" action="vs-process.php" method="POST">
+      Done with the task?
+      <button id="nextButton" class="btn btn-large btn-primary" type="submit">
+        NEXT
+      </button>
+    </form>
+  </div>
+
     <div id="stats" class="span4"></div>
   </div>
 
@@ -96,7 +121,7 @@ include('header.php');
 <script src="js/libs/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/libs/jquery-ui-1.8.22.custom.min.js"></script> 
 <script type="text/javascript" src="js/libs/jcarousel/jquery.jcarousel.min.js"></script>
-
+<script type="text/javascript" src="js/libs/lightbox/jquery.lightbox-0.5.js"></script>
 <script src="js/libs/jcview/jquery.vt.jcview.js"></script>
 <script src="js/libs/log4javascript.js"></script>
 
@@ -107,9 +132,10 @@ include('header.php');
       var interface_id = <?php echo $interface_id; ?>;
       var is_admin = <?php echo $_SESSION["is_admin"]; ?>;
       //console.log(is_admin, !is_admin, (is_admin == true), (is_admin == false));      
-      var log = log4javascript.getDefaultLogger();
+      var log = log4javascript.getLogger();
       var ajaxAppender = new log4javascript.AjaxAppender("ajax-add-log.php");
       log.addAppender(ajaxAppender);
+      log.info(formatListLog(interface_id, task_id, "<?php echo $_SESSION['username']; ?>", "open", "page"));
 
       var num_videos = <?php echo $result1->num_rows; ?>;
       var labels_array = <?php echo json_encode($labels_array); ?>;
@@ -118,35 +144,89 @@ include('header.php');
       var meta_array = <?php echo json_encode($meta_array); ?>;
       //var user_id = <?php echo $user_id; ?>;
       var num_labels = 0;
+      var num_images = 0;
+      var num_tools = 0;
+
       var filters = [];
 
+
+      var input = $("<input>").attr("type", "hidden").attr("name", "part").val("<?php echo $_GET['part'];?>");
+      $('#myForm').append($(input));
+      var input = $("<input>").attr("type", "hidden").attr("name", "cond").val("<?php echo $_GET['cond'];?>");
+      $('#myForm').append($(input));
+      var input = $("<input>").attr("type", "hidden").attr("name", "step").val("<?php echo $_GET['step'];?>");
+      $('#myForm').append($(input));
+      var input = $("<input>").attr("type", "hidden").attr("name", "from").val("<?php echo $_SERVER['PHP_SELF'];?>");
+      $('#myForm').append($(input));
+      var input = $("<input>").attr("type", "hidden").attr("name", "tid").val(task_id);
+      $('#myForm').append($(input));
+      var input = $("<input>").attr("type", "hidden").attr("name", "iid").val(interface_id);
+      $('#myForm').append($(input));
+      
       // Setting the page title
-      if (task_id > 0)
-        $("#task-selector li").eq(task_id).addClass("active");
-      if (task_id == 1){
-        $("#title").html("Motion Blur");
-      } else if (task_id == 2) {
-        $("#title").html("Retro Effect");
-      } else if (task_id == 3) {
-        $("#title").html("TBD");
-      } else {
+      if (task_id == 0){
         $("#title").html("Showing all videos");
+      } else {        
+        $("#title").html("<?php echo $task['name'];?>");
       }
 
+
+      $('input[type=radio]').live('change', function() { 
+        log.info(formatListLog(interface_id, task_id, "<?php echo $_SESSION['username']; ?>", "click", "views", ""));
+        $(".all-view").toggle();
+        $(".simple-view").toggle();
+      });
+      
       // Add video entries for each interface
       $.each(videos_array, function(index, value){
         var params = "?vid=" + this.id + "&iid=" + interface_id;
+
+
         if (interface_id == 1) {
           num_labels = num_labels + labels_array[index].length;
+          var local_num_images = 0;
+          var local_num_tools = 0;
+          var before_img = "";
+          var after_img = "";
+          $.each(labels_array[index], function(i, v){
+            if (v.type == "image"){
+              local_num_images = local_num_images + 1;
+              if (v.comment == "#initial")
+                before_img = v.thumbnail;
+              if (v.comment == "#final")
+                after_img = v.thumbnail;
+            }
+          });
+          local_num_tools = labels_array[index].length - local_num_images;
+          num_images = num_images + local_num_images;
+          num_tools = num_tools + local_num_tools;
           var html2 = "";
           if (is_admin)
-            html2 = "<p class='video-info-meta pull-right'><a href='label.php" + params + "'>(Label)</a></p>";
+            html2 = " | <a href='label.php" + params + "'>(Label)</a>";
+            //html2 = "<p class='video-info-meta pull-right'><a href='label.php" + params + "'>(Label)</a></p>";
 
-          $title = $("<h3/>").addClass("span8").append("<a href='browse.php" + params + "'>" + this.title + "</a>");
-          $desc = $("<div/>").addClass("span8").append(meta_array[index].description);
-          $detail = $("<div/>").addClass("span3").append("<p class='pull-right video-info-meta'>" + getTimeDisplay(this.duration) + " | " + labels_array[index].length + " labels</p>" + html2);
-          $info = $("<div/>").addClass("video-info row").append($title).append($detail).append($desc);
-          $view = $("<div/>").addClass("row").append("<div class='video-view span12'></div>");
+          $title = $("<h3/>").addClass("span12").append("<a href='browse.php" + params + "'>" + this.title + "</a>");
+          $desc = $("<div/>").addClass("span12").append(meta_array[index].description);
+          //if (is_admin)
+          //  $detail = $("<div/>").addClass("span3").append("<p class='pull-right video-info-meta'>" + labels_array[index].length + " labels (" + local_num_images + "+" + local_num_tools + ")</p>" + html2);
+          //else
+          //  $detail = $("<div/>").addClass("span3").append("<p class='pull-right video-info-meta'>" + local_num_tools + " steps</p>" + html2);
+          //$info = $("<div/>").addClass("video-info row").append($title).append($detail).append($desc);
+
+          if (is_admin)
+            $detail = $("<div/>").addClass("span12 video-meta").append("<p>" + labels_array[index].length + " labels (" + local_num_images + "+" + local_num_tools + ") | " + getTimeDisplay(this.duration) + " | by " + meta_array[index].uploader + " | " + formatDate(meta_array[index].upload_date) + html2 + "</p>");
+          else
+            $detail = $("<div/>").addClass("span12 video-meta").append("<p>" + local_num_tools + " steps | " + getTimeDisplay(this.duration) + " | by " + meta_array[index].uploader + " | " + formatDate(meta_array[index].upload_date) + html2 + "</p>");
+          //$info = $("<div/>").addClass("video-info row span9").append($title).append($desc).append($detail);
+          $info = $("<div/>").addClass("video-info row").append($title).append($desc).append($detail);
+
+          var simpleHTML = "<div class='simple-view span12'><ul class='thumbnails'>" + 
+            "<li class='span3'>" + 
+            "<a href='" + before_img + "' class='thumbnail lightbox-simple'><img src='" + before_img + "'></a></li>" + 
+            "<li class='span3'>" + 
+            "<a href='" + after_img + "' class='thumbnail lightbox-simple'><img src='" + after_img + "'></a></li>" +            
+            "</ul></div>";
+          $view = $("<div/>").addClass("row view-change").append("<div class='all-view video-view span12'></div>").append(simpleHTML);
           $item = $("<div/>").addClass("video-item").append($info).append($view);
           $("<li/>").data("video_id", this.id).append($item).appendTo("#results");
           /* Generated <li> node:
@@ -169,7 +249,7 @@ include('header.php');
           $thumb = $("<div/>").addClass("span2").append("<a href='" + thumbnail + "'><img src='" + thumbnail + "'></a></div>");
           $title = $("<h3/>").append("<a href='browse.php" + params + "'>" + this.title + "</a>");
           $desc = $("<div/>").append(meta_array[index].description);
-          $detail = $("<div/>").addClass("video-meta").append("<p>" + getTimeDisplay(this.duration) + " | by " + meta_array[index].uploader + " | " + meta_array[index].upload_date + "</p>");
+          $detail = $("<div/>").addClass("video-meta").append("<p>" + getTimeDisplay(this.duration) + " | by " + meta_array[index].uploader + " | " + formatDate(meta_array[index].upload_date) + "</p>");
           $info = $("<div/>").addClass("video-info-youtube span9").append($title).append($desc).append($detail);
           $item = $("<div/>").addClass("video-item row").append($thumb).append($info);
           $("<li/>").append($item).appendTo("#results");
@@ -197,9 +277,12 @@ include('header.php');
       });
 
       // Display statistics
-      if (interface_id == 1)
-        $("#stats").html("Total: " + num_videos + " videos and " + num_labels + " labels");
-      else if (interface_id == 2)
+      if (interface_id == 1){
+        if (is_admin)
+          $("#stats").html("Total: " + num_videos + " videos | " + num_labels + " labels (" + num_images + " images +" + num_tools + " steps)");
+        else
+          $("#stats").html("Total: " + num_videos + " videos | average " + Math.round(num_tools/num_videos) + " steps");
+      } else if (interface_id == 2)
         $("#stats").html("Total: " + num_videos + " videos");
       else if (interface_id == 3)
         $("#stats").html("Total: " + num_videos + " results");      
@@ -210,9 +293,11 @@ include('header.php');
       $("#filters").append($("<ul/>"));
       $.each(tools_array, function(index, value){
         var bar_width = parseInt(this.freq) * 10;
-        $("#filters ul").append("<li><span class='span3'><a href='#' class='tool-filter' data-tool-id='" + this.tool + "'>" 
-          + this.tool + "</a> (" + this.freq + ")</span>" 
-          + "<div class='progress span2' style='margin-bottom:10px; height:10px;'><div class='bar' style='width:" + bar_width + "px;'></div></div></li>");
+        $("#filters ul").append("<li class='row'>" 
+          + "<div class='progress span2' style='margin-top:5px; margin-bottom: 5px; height:12px;'><div class='bar' style='float: right; width:" + bar_width + "px;'></div></div>" 
+          + "<span class='span4'><a href='#' class='tool-filter' data-tool-id='" + this.tool + "'>" 
+          + formatTool(this.tool, "toolname-emphasize") + "</a> (" + this.freq + ")</span>" 
+          + "</li>");
         
       });
 
@@ -222,23 +307,39 @@ include('header.php');
         var num_labels = 0;
         // get video_id that must be hidden
         $.each(videos_array, function(index, video){
-          var is_shown = false;
+          var is_shown = true;
           if (filters.length == 0){
               num_labels = num_labels + labels_array[index].length;   
               return;  
           }
+          $.each(filters, function(i,filter){
+            var does_exist = false;
+            //console.log("filter", filter)
+            $.each(labels_array[index], function(ii, label){
+              //console.log("label", label);
+              if (label.type != "image" && label.tool == filter)
+                does_exist = true;
+            });
+            if (!does_exist)
+              is_shown = false;
+          });
+          /*
           $.each(labels_array[index], function(i, v){
             // skip image and only look at others
             // also, do not count duplicates
-            if (!is_shown && this.type != "image" && filters.indexOf(this.tool) != -1) {
-              num_labels = num_labels + labels_array[index].length;
-              is_shown = true;
+            // if any mismatch, this should be hidden (multiple filters are connected via AND not OR)
+            if (!is_shown && this.type != "image" && filters.indexOf(this.tool) == -1) {
+              is_shown = false;
             }
           });
-          if (filters.length > 0 && !is_shown)
+          */
+          if (!is_shown) {
             hide_array.push(video.id);
+          } else {
+            num_labels = num_labels + labels_array[index].length;
+          }
         });
-        console.log("hide_array", hide_array);
+        //console.log("hide_array", hide_array);
         // for each li, hide the ones that are not in the list
         $("#results li").each(function(index, value){
           if (hide_array.indexOf($(this).data('video_id')) != -1)
@@ -264,10 +365,11 @@ include('header.php');
         filters.push(tool);
         $("#applied-filters-header").html("Showing all videos with:");
         $("#applied-filters").append("<div class='applied-filter' data-tool-id='" + tool+ "'>" + tool + "<i class='icon-remove'></i></div>");
-        console.log("add filter", tool);
-        console.log("filters", filters);
+        //console.log("add filter", tool);
+        //console.log("filters", filters);
         // for each video div, hide the ones that do not have this tool in it
         update_list(filters);
+        log.info(formatListLog(interface_id, task_id, "<?php echo $_SESSION['username']; ?>", "click", "filter", tool));
       });
       
       // when click on an already-added filter, remove a filter
@@ -285,6 +387,7 @@ include('header.php');
         console.log("filters", filters);
         // for each video div, hide the ones that do not have this tool in it
         update_list(filters);
+        log.info(formatListLog(interface_id, task_id, "<?php echo $_SESSION['username']; ?>", "click", "applied-filter", tool));
       });
 
       // for each result entry, display a slideshow summary
@@ -296,6 +399,9 @@ include('header.php');
         });
       });
 
+      $("a.lightbox").lightBox();
+      $("a.lightbox-simple").lightBox();
+
 /*
       function mycarousel_initCallback(carousel) {
         $('.jcarousel-control a').click(function() {
@@ -305,10 +411,19 @@ include('header.php');
       }
 */
       $(".mycarousel").jcarousel({
-        scroll: 1,
-        visible: 9//,
+        scroll: 2,
+        visible: 7//,
         //initCallback: mycarousel_initCallback
       });
+
+      var cond = "<?php echo $_GET["cond"]; ?>";
+      if (cond == "A")
+        $("#task-selector li").eq(5).addClass("active");
+      else
+        $("#task-selector li").eq(6).addClass("active");
+
+
+
     });
 </script>
 <script src="js/script.js"></script>

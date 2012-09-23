@@ -83,7 +83,7 @@
     </form>
   </div>
   <div id="labels">
-    <ul id="label-list">
+    <ul id="label-list" class="list-striped list-hover">
       <li class="label-header">
         <span class="list-image">Image</span>
         <span class="list-time">Time</span>
@@ -246,8 +246,10 @@
         //console.log(obj.video_id, obj.user_id);
         $.post("update-label.php", { 
           id: id,
-          video_id: obj.video_id.toString(),
-          user_id: obj.user_id.toString(),
+          video_id: "<?=$video_id;?>",
+          user_id: "<?=$user_id;?>",          
+          //video_id: obj.video_id.toString(),
+          //user_id: obj.user_id.toString(),
           tm: $li.find("input[name='tm']").val(),
           type: $li.find("select[name='type']").val(),
           tool: $li.find("input[name='tool']").val(),
@@ -435,7 +437,7 @@
             $("#capture-button").text("RESUME");
             $("#form1 #tm").val(Math.floor(jwplayer().getPosition()));
             $("#form1 #tool").val("");
-            //$("#select-image").prop("checked", true);
+            $("#select-image").prop("checked", true);
             $("#tool").attr("disabled", "disabled");
             $("#form1 #type").val("image");
             $("#form1 #tool-icon" ).attr( "src", "img/icons/white.png");
