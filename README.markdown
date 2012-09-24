@@ -23,16 +23,22 @@ Standard-compliant web browser with HTML5 and CSS3
 
 # Web Server Setup Instruction 
 
+## Get Video and Thumbnails
+Media files are not in the repository, so you need to download them.
+- [thumbnails](http://juhokim.com/toolscape/thumbnails.zip) (extract to `[toolscape_root]/img/thumbnails`)
+- [video](http://juhokim.com/toolscape/video.zip) (extract to '[toolscape_root]/video')
+
 ## Database
 1. Update `conn.php` with correct MySQL connection information.
 1. Set up an empty MySQL database called `video_tutorial`, or name you specified in `conn.php`.
 1. Then import tables and records from `vt.sql`. This file assumes `video_tutorial` to be the database name. 
 Be careful if you want to use another name for database.
-- command line: TBD
-- phpmysql: Go to `import`, select `vt.sql`, and done.
+	- command line: TBD
+	- phpmysql: Go to `import`, select `vt.sql`, and done.
 
 ## Machine-Specific Configuration
 ToolScape requires ffmpeg for video processing and thumbnail generation. Make sure the ffmpeg path is correctly configured.
+
 1. Verify you machine's ffmpeg path by running `which ffmpeg` from command line.
 1. Then, modify `conn.php` to reflect the correct path.
 
