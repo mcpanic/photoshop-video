@@ -47,10 +47,11 @@ ToolScape requires ffmpeg for video processing and thumbnail generation. Make su
 Open `index.php` and enter `admin` as your username.
 
 ## Switching Tasks and Interfaces
-After logging in, jump to `list.php?part=2&step=list&cond=A&tid=4&iid=1`.
+After logging in, skip ahead to `Part 2-1` or set URL to `list.php?part=2&step=list&cond=A&tid=4&iid=1`.
 Change `tid` and `iid` parameters for different tasks and interfaces, respectively.
 
 `tid` values and task descriptions
+
 1. Motion Blur
 1. Background Removal
 1. Lomo Effect
@@ -59,6 +60,7 @@ Change `tid` and `iid` parameters for different tasks and interfaces, respective
 1. Teeth Whitening
 
 `iid` values and interface descriptions
+
 1. ToolScape
 1. YouTube
 1. Text only + step-by-step
