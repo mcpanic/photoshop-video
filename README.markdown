@@ -34,7 +34,7 @@ Media files are not in the repository, so you need to download them.
 1. Then import tables and records from `vt.sql`. This file assumes `video_tutorial` to be the database name. 
 Be careful if you want to use another name for database.
 	- command line: TBD
-	- phpmysql: Go to `import`, select `vt.sql`, and done.
+	- phpmyadmin: Go to `import`, select `vt.sql`, and done.
 
 ## Machine-Specific Configuration
 ToolScape requires ffmpeg for video processing and thumbnail generation. Make sure the ffmpeg path is correctly configured.

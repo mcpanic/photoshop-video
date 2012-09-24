@@ -11,7 +11,9 @@ $myusername=$_POST["myusername"];
 // To protect MySQL injection
 $myusername = stripslashes($myusername);
 //$mypassword = stripslashes($mypassword);
-$myusername = mysql_real_escape_string($myusername);
+
+$myusername = $mysqli->escape_string($myusername);
+//$myusername = mysql_real_escape_string($myusername);
 //$mypassword = mysql_real_escape_string($mypassword);
 
 $result = $mysqli->query("SELECT * FROM users WHERE username='$myusername'");

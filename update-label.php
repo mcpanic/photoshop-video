@@ -1,15 +1,16 @@
 <?php
 //print_r($_POST);
-$id = intval($_POST["id"]);
-$video_id = mysql_real_escape_string($_POST["video_id"]);
-$user_id = mysql_real_escape_string($_POST["user_id"]);
-$tm = mysql_real_escape_string($_POST["tm"]);
-$type = mysql_real_escape_string($_POST["type"]);
-$tool = mysql_real_escape_string($_POST["tool"]);
-$comment = mysql_real_escape_string($_POST["comment"]);
-$thumbnail = mysql_real_escape_string($_POST["filepath"]);
 
 include "conn.php";
+
+$id = intval($_POST["id"]);
+$video_id = $mysqli->escape_string($_POST["video_id"]);
+$user_id = $mysqli->escape_string($_POST["user_id"]);
+$tm = $mysqli->escape_string($_POST["tm"]);
+$type = $mysqli->escape_string($_POST["type"]);
+$tool = $mysqli->escape_string($_POST["tool"]);
+$comment = $mysqli->escape_string($_POST["comment"]);
+$thumbnail = $mysqli->escape_string($_POST["filepath"]);
 
 $url = "label.php?vid=$video_id&tm=$tm";
 

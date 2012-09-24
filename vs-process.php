@@ -5,8 +5,8 @@ include "conn.php";
 //echo var_dump($_SESSION);
 //echo var_dump($_SERVER);
 
-$session_data = mysql_real_escape_string(serialize($_SESSION));
-$post_data = mysql_real_escape_string(serialize($_POST));
+$session_data = $mysqli->escape_string(serialize($_SESSION));
+$post_data = $mysqli->escape_string(serialize($_POST));
 
 $success = true;
 if (!$mysqli->query("INSERT INTO responses(session, response) VALUES('$session_data', '$post_data')"))

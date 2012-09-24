@@ -1,7 +1,8 @@
 <?php
+include "conn.php";
 
-$tm = mysql_real_escape_string($_POST["tm"]);
-$filepath = mysql_real_escape_string($_POST["filepath"]);
+$tm = $mysqli->escape_string($_POST["tm"]);
+$filepath = $mysqli->escape_string($_POST["filepath"]);
 
 $path_parts = pathinfo($_SERVER["SCRIPT_NAME"]);
 //echo $path_parts['dirname'], "\n";

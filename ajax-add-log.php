@@ -18,25 +18,24 @@
     - object id: (object type)_id to refer to the corresponding database
 */
 
+include "conn.php";
 
-
-$logger = mysql_real_escape_string($_POST["logger"]);
-$timestamp = mysql_real_escape_string($_POST["timestamp"]);
-$level = mysql_real_escape_string($_POST["level"]);
-$url = mysql_real_escape_string($_POST["url"]);
-$message = mysql_real_escape_string($_POST["message"]);
+$logger = $mysqli->escape_string($_POST["logger"]);
+$timestamp = $mysqli->escape_string($_POST["timestamp"]);
+$level = $mysqli->escape_string($_POST["level"]);
+$url = $mysqli->escape_string($_POST["url"]);
+$message = $mysqli->escape_string($_POST["message"]);
 /*
 $message = json_decode($_POST["message"], true);
 
 foreach($message as $key => $value) {
   $keys[] = $key;
-  $values[] = "'" . mysql_real_escape_string($value) . "'";
-  //(is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . mysql_real_escape_string($value) . "'"; 
+  $values[] = "'" . $mysqli->escape_string($value) . "'";
+  //(is_numeric($value)) ? "`$key` = $value" : "`$key` = '" . $mysqli->escape_string($value) . "'"; 
 }
 $keys = implode(", ", $keys);
 $values = implode(", ", $values);
 */
-include "conn.php";
 
 //if (!$mysqli->query("INSERT INTO logs(logger, timestamp, level, url, $keys) " . 
 //  "VALUES('$loger', '$timestamp', '$level', '$url', )"))

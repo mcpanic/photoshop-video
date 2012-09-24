@@ -17,8 +17,8 @@ if ($handle = opendir($path)) {
             	$string = file_get_contents($path.$file);
   				$json = json_decode($string, true);
 
-  				$title = mysql_real_escape_string($json['title']);
-  				$id = mysql_real_escape_string($json['id']);
+  				$title = $mysqli->escape_string($json['title']);
+  				$id = $mysqli->escape_string($json['id']);
   				$ext = $json['ext'];
 				  if (!$mysqli->query("UPDATE videos SET title='$title', filename='$id.$ext' WHERE slug='$id'"))
 				    echo "query error";  				
