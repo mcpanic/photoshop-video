@@ -36,12 +36,17 @@ Be careful if you want to use another name for database.
 	- command line: TBD
 	- phpmyadmin: Go to `import`, select `vt.sql`, and done.
 
+## Directory Permission
+Make sure `img/thumbnails/` directory is accessible by the user PHP runs in.
+You can verify the username in PHP by adding `echo exec('whoami');` to a blank PHP file.
+
 ## Machine-Specific Configuration
 ToolScape requires ffmpeg for video processing and thumbnail generation. Make sure the ffmpeg path is correctly configured.
 
 1. Verify you machine's ffmpeg path by running `which ffmpeg` from command line.
 1. Then, modify `conn.php` to reflect the correct path.
 
+Refer to [ffmpeg installation instructions](https://ffmpeg.org/trac/ffmpeg/wiki/UbuntuCompilationGuide) if you need to compile ffmpeg on Linux.
 
 # Running ToolScape
 Open `index.php` and enter `admin` as your username.
