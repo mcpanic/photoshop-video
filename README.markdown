@@ -50,7 +50,7 @@ Open `index.php` and enter `admin` as your username.
 After logging in, jump to `list.php?part=2&step=list&cond=A&tid=4&iid=1`.
 Change `tid` and `iid` parameters for different tasks and interfaces, respectively.
 
-`tid`
+`tid` values and task descriptions
 1. Motion Blur
 1. Background Removal
 1. Lomo Effect
@@ -58,7 +58,7 @@ Change `tid` and `iid` parameters for different tasks and interfaces, respective
 1. Photo to Sketch
 1. Teeth Whitening
 
-`iid`
+`iid` values and interface descriptions
 1. ToolScape
 1. YouTube
 1. Text only + step-by-step
