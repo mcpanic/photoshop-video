@@ -1,4 +1,4 @@
-*ToolScape* is a web interface for browsing and watching tutorial videos.
+**ToolScape** is a web interface for browsing and watching tutorial videos.
 It features a storyboard video summary for faster scanning and interactive timeline for non-sequential watching.
 
 # Requirement 
