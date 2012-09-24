@@ -1,4 +1,4 @@
-ToolScape is a web interface for browsing and watching tutorial videos.
+*ToolScape* is a web interface for browsing and watching tutorial videos.
 It features a storyboard video summary for faster scanning and interactive timeline for non-sequential watching.
 
 # Requirement 
@@ -10,15 +10,15 @@ Standard-compliant web browser with HTML5 and CSS3
 
 
 # Directory Structure
-- archive: old prototypes for reference.
-- css: all stylesheets.
-- img: all images and automatically-generated thumbnails for labels.
-- js: all Javascript code resides here. Third party libraries should be added to the `libs` directory.
-- video: all video files and their Youtube metadata files (.info.json). Subdirectories:
-	- ff: all Fast Forward summaries
-	- sc: all Scene Clip summaries
-	- scripts: scripts for downloading and processing videos
-	- thumbs: thumbnail sprites for the thumbnail preview feature in the video player
+- `archive`: old prototypes for reference.
+- `css`: all stylesheets.
+- `img`: all images and automatically-generated thumbnails for labels.
+- `js`: all Javascript code resides here. Third party libraries should be added to the `libs` directory.
+- `video`: all video files and their Youtube metadata files (.info.json). Subdirectories:
+	- `ff`: all Fast Forward summaries
+	- `sc`: all Scene Clip summaries
+	- `scripts`: scripts for downloading and processing videos
+	- `thumbs`: thumbnail sprites for the thumbnail preview feature in the video player
 
 
 # Web Server Setup Instruction 
@@ -26,7 +26,7 @@ Standard-compliant web browser with HTML5 and CSS3
 ## Get Video and Thumbnails
 Media files are not in the repository, so you need to download them.
 - [thumbnails](http://juhokim.com/toolscape/thumbnails.zip) (extract to `[toolscape_root]/img/thumbnails`)
-- [video](http://juhokim.com/toolscape/video.zip) (extract to '[toolscape_root]/video')
+- [video](http://juhokim.com/toolscape/video.zip) (extract to `[toolscape_root]/video`)
 
 ## Database
 1. Update `conn.php` with correct MySQL connection information.
