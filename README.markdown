@@ -45,3 +45,24 @@ ToolScape requires ffmpeg for video processing and thumbnail generation. Make su
 
 # Running ToolScape
 Open `index.php` and enter `admin` as your username.
+
+## Switching Tasks and Interfaces
+After logging in, jump to `list.php?part=2&step=list&cond=A&tid=4&iid=1`.
+Change `tid` and `iid` parameters for different tasks and interfaces, respectively.
+
+`tid`
+1. Motion Blur
+1. Background Removal
+1. Lomo Effect
+1. Retro Effect
+1. Photo to Sketch
+1. Teeth Whitening
+
+`iid`
+1. ToolScape
+1. YouTube
+1. Text only + step-by-step
+
+## Labeling Interface
+From the ToolScape's `list.php` page, click on the `(label)` link associated with each video.
+
