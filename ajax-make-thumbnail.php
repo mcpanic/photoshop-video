@@ -1,6 +1,5 @@
 <?php
 include "conn.php";
-
 $tm = $mysqli->escape_string($_POST["tm"]);
 $filepath = $mysqli->escape_string($_POST["filepath"]);
 
@@ -32,4 +31,5 @@ if($result == "error") {
 	$thumbnail = $result;
 	echo $thumbnail;
 }
+
 ?>
