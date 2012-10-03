@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Video Tutorials Study</title>
+  <title>ToolScape</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -25,13 +25,18 @@
 <body>
 <div class="container">
 <div class="row">
-	<h1 class="offset3">Video Tutorials Study</h1>
+	<h1 class="offset3">ToolScape</h1>
 	<div class="offset2">
-		<form class="form-horizontal" name="form1" method="post" action="check-login.php">	
+		<form class="form-horizontal" name="form1" method="post" action="check-login.php">
 		<div class="control-group">	
 			<label class="control-label" for="myusername">Username</label>
 			<div class="controls">
 				<input name="myusername" type="text" id="myusername">
+			</div>
+			
+			<div class="controls">
+				<input type="radio" name="version" value="v2" checked>  V2 prototype<br>
+				<input type="radio" name="version" value="v1">  V1 Video Tutorials Study
 			</div>
 		</div>
 		<div class="control-group">

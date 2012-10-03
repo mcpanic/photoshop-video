@@ -45,7 +45,7 @@
 ?>
 
 <?php 
-include('header.php');
+include('v2-header.php');
 ?>
 
   <h3><a href="javascript:history.go(-1)">&lt;&lt; Back to list</a></h3>
@@ -422,13 +422,13 @@ include('header.php');
         jwplayer().seek(tm);
         log.info(formatBrowseLog(video_id, interface_id, task_id, "<?php echo $_SESSION['username']; ?>", "open", "tm in url", tm));
       }
-
+/*
       var cond = "<?php echo $_GET["cond"]; ?>";
       if (cond == "A")
         $("#task-selector li").eq(5).addClass("active");
       else
         $("#task-selector li").eq(6).addClass("active");
-
+*/
 
 /*
 var player = null; 

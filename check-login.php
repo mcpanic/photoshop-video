@@ -24,7 +24,10 @@ if ($result->num_rows == 1){
 	$_SESSION["username"] = $myusername;
 	$_SESSION["is_admin"] = $user["is_admin"];
 	$_SESSION["uid"] = $user["id"];
-	header("location:intro.php");
+	if ($_POST["version"] == "v1")
+		header("location:intro.php");
+	else
+		header("location:v2-list.php?tid=1&iid=1");
 } else
 	echo "Username does not exist!";
 

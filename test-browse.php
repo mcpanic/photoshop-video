@@ -1,4 +1,5 @@
 <?php
+/* A quick mockup used during the paired research session on Sep. 27, 2012 */
   session_start();
   if(!isset($_SESSION["username"])){
     header("location:index.php");
@@ -17,10 +18,10 @@
   else
     $tm = -1;
 
-  if (isset($_GET["iid"]))
-    $interface_id = $_GET["iid"];
-  else
-    $interface_id = 1;
+  //if (isset($_GET["iid"]))
+  //  $interface_id = $_GET["iid"];
+  //else
+    $interface_id = 3;
 
   include "conn.php";
   
@@ -50,7 +51,7 @@ include('header.php');
 
   <h3><a href="javascript:history.go(-1)">&lt;&lt; Back to list</a></h3>
 
-  <h2><?=$video['title'];?></h2>
+  <!--<h2><?=$video['title'];?></h2>-->
   <!--<div id="description"><?=$json['description'];?></div>-->
 
 <?php if ($interface_id == 1) { ?>
