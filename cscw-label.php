@@ -77,10 +77,12 @@
         <span class="capture-image"><a id="jcrop-link" class="jcrop-link" href="#"><img src="img/icons/white.png"/></a></span>
         <span class="capture-time"><input type="text" id="tm" class="time-field" name="tm"></span>
         <span class="capture-tool">
-          <label for="select-image"><input type="radio" name="selection" id="select-image" value="Image" />Image</label>  
-          <label for="select-tool"><input type="radio" name="selection" id="select-tool" value="Tool" />Tool</label>
+          <label for="select-image"><input type="radio" name="selection" id="select-image" value="Image" />Before/After</label>  
+          <label for="select-tool"><input type="radio" name="selection" id="select-tool" value="Tool" />Instruction</label>
+          <!--
           <label for="select-menu"><input type="radio" name="selection" id="select-menu" value="Menu" />Menu</label>
           <label for="select-other"><input type="radio" name="selection" id="select-other" value="Other" />Other</label>
+          -->
           <div>
             <img id="tool-icon" src="img/icons/white.png"/>
             <input type="text" id="tool" name="tool" class="tool-field">
