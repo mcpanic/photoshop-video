@@ -17,7 +17,6 @@
   $video = $result->fetch_assoc();
   $video_filename = $video['filename'];
 
-
   $json_filename = "cscw/" . $task_id . "/" . $video_filename . ".info.json";
   //$string = file_get_contents("video/$video_filename.info.json");  
   $string = file_get_contents($json_filename);  
@@ -485,7 +484,7 @@
       width: "640",
       height: "363",
       controlbar: "bottom",
-      file: "video/<?=$video_filename;?>",
+      file: "http://people.csail.mit.edu/juhokim/annotation-videos/c02/00002.6IN_mupBjh8.flv", //"video/<?=$video_filename;?>",
       image: "<?=$json['thumbnail'];?>"
 
     });
