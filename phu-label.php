@@ -17,18 +17,21 @@
   $video = $result->fetch_assoc();
   $video_filename = $video['filename'];
 
-  //$string = file_get_contents("video/$video_filename.info.json");
+
   $json_filename = "cscw/" . $task_id . "/" . $video_filename . ".info.json";
-  $json_file = fopen($json_filename);
-  if (!$json_file){
-    echo "unable to read remote file " . $json_filename;
-    exit;
-  }
-  $string = "";
-  while (!feof ($json_file)) {
-      $string .= fgets ($json_file, 1024);
-  }
-  fclose($json_file);  
+  //$string = file_get_contents("video/$video_filename.info.json");  
+  $string = file_get_contents($json_filename);  
+  // $json_file = fopen($json_filename);
+  // if (!$json_file){
+  //   echo "unable to read remote file " . $json_filename;
+  //   exit;
+  // }
+  // $string = "";
+  // while (!feof ($json_file)) {
+  //     $string .= fgets ($json_file, 1024);
+  // }
+  // fclose($json_file);  
+
   $json = json_decode($string, true);
 
   // user_id needed here because you might want to only see your own labels, not other people's.
