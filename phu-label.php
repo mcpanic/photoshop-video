@@ -18,7 +18,7 @@
   $video_filename = $video['filename'];
 
   //$string = file_get_contents("video/$video_filename.info.json");
-  $json_filename = "http://people.csail.mit.edu/juhokim/annotation-videos/" . $task_id . "/more/" . $video_filename . ".info.json";
+  $json_filename = "http://people.csail.mit.edu/juhokim/annotation-videos/" . $task_id . "/" . $video_filename . ".info.json";
   $json_file = fopen($json_filename);
   if (!$json_file){
     echo "unable to read remote file " . $json_filename;
