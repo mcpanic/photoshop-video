@@ -13,7 +13,8 @@ include "conn.php";
 		// $video['task_id'] = "1001";
 	while ($video = $result->fetch_assoc()) {
 		$url = "cscw-label.php?vid=" . $video['id'] . "&tid=" . $video['task_id'];
-		echo $video['id'] . "\t" . $video['title'] . "\t" . "<a href='$url'>$url</a>";	}
+		echo $video['id'] . "\t" . $video['title'] . "\t" . "<a href='$url' target='_blank'>$url</a><br/>";	
+	}
 ?>
 </body>
 </html>
