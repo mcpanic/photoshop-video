@@ -133,7 +133,7 @@ include('v2-header.php');
       var num_tools = 0;
 
       var filters = [];
-
+      $('input[name=view-option]').first().trigger("click")
 /*
       var input = $("<input>").attr("type", "hidden").attr("name", "part").val("<?php echo $_GET['part'];?>");
       $('#myForm').append($(input));

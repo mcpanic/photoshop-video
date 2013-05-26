@@ -149,7 +149,8 @@ include('header.php');
 
       var filters = [];
 
-
+      $('input[name=view-option]').first().trigger("click")
+      
       var input = $("<input>").attr("type", "hidden").attr("name", "part").val("<?php echo $_GET['part'];?>");
       $('#myForm').append($(input));
       var input = $("<input>").attr("type", "hidden").attr("name", "cond").val("<?php echo $_GET['cond'];?>");

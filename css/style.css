@@ -5,12 +5,22 @@
         font: 13px/18px Arial, sans-serif; */
         padding-top: 60px;
         padding-bottom: 40px;
+        -webkit-user-select: none;  
+        -moz-user-select: none;    
+        -ms-user-select: none;      
+        user-select: none;          
     }
 	a { color: #360; }
+
 
     #controller { margin: 10px; }
     ul { list-style-type:none; padding-left: 0px; margin: 0; }
     input { height: 25px; }
+
+input[name=view-option]{
+    margin-top: -5px;
+    
+}
 
 .alert{
     display: none;

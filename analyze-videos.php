@@ -179,9 +179,12 @@ function getTDisplay(id){
         console.log(video);
         var html = "";
         $.each(video, function(i, v){
-          if (i == "title" || i == "url" || i == "slug" || i == "added_at" || i == "filename")
+          if (i == "title" || i == "slug" || i == "added_at" || i == "filename")
             return;
-          html = html + " " + v;
+          else if (i == "url")
+            html = html + "<a href='" + v + "'>link</a>";
+          else
+            html = html + " " + v;
         });
         $("#stats").append("<div>" + html + "</div>")
       });
