@@ -7,9 +7,9 @@ $mid_list = array();
 $pid_list = array();
 
 
-$result1 = $mysqli->query("SELECT * FROM videos WHERE task_id='$task_id'");
-$result2 = $mysqli->query("SELECT * FROM tasks WHERE id='$task_id'");
-$task = $result2->fetch_assoc();
+$result1 = $mysqli->query("SELECT * FROM videos");
+//$result2 = $mysqli->query("SELECT * FROM tasks WHERE id='$task_id'");
+//$task = $result2->fetch_assoc();
 
 
 $videos_array = array();
@@ -20,7 +20,8 @@ while ($video = $result1->fetch_assoc()) {
 	// $video_filename = $video['filename'];
 	// $string = file_get_contents("video/$video_filename.info.json");
 	// $json = json_decode($string, true);
-
+	if (!in_array($cid_list, $video['id']) && !in_array($mid_list, $video['id']) && !in_array($pid_list, $video['id']))
+		continue;
 	$result3 = $mysqli->query("SELECT * FROM labels WHERE video_id = '" . $video['id'] . "'");    
 	$label_array = array();
 	// $html = "";
