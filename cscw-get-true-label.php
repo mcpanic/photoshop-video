@@ -20,32 +20,40 @@ while ($video = $result1->fetch_assoc()) {
 	// $video_filename = $video['filename'];
 	// $string = file_get_contents("video/$video_filename.info.json");
 	// $json = json_decode($string, true);
-	if (!in_array($cid_list, $video['id']) && !in_array($mid_list, $video['id']) && !in_array($pid_list, $video['id']))
+	if (!in_array(intval($video['id']), $cid_list) && !in_array(intval($video['id']), $mid_list) && !in_array(intval($video['id']), $pid_list))
 		continue;
-	$result3 = $mysqli->query("SELECT * FROM labels WHERE video_id = '" . $video['id'] . "'");    
+	$result3 = $mysqli->query("SELECT * FROM labels WHERE video_id = '" . $video['id'] . "' ORDER BY tm ASC");    
 	$label_array = array();
 	// $html = "";
 	while ($label = $result3->fetch_assoc()) {
 	  $label_array[] = $label;  
 	}
-
-	$labels_array[] = $label_array;
+	$labels_array[$video['id']] = array();
+	$labels_array[$video['id']] = $label_array;
 	$videos_array[] = $video;
 	// $meta_array[] = $json;
 } 
 
-$result4 = $mysqli->query("SELECT count(distinct videos.id) AS freq, tool FROM labels, videos WHERE labels.video_id=videos.id AND tool<>'' GROUP BY tool ORDER BY freq DESC LIMIT 7");
-$tools_array = array();
-while ($tool = $result4->fetch_assoc()) {
-	$tools_array[] = $tool;
-}
 ?>
 
 <html>
 <body>
 	<?php
-	foreach ($labels_array as $label_array){
-		var_dump($label_array);
+	foreach ($labels_array as $key => $label_array){
+		$inst_string = "";
+		$ba_string = "";
+		foreach ($label_array as $label){
+			if ($label['type'] == "image")
+				$ba_string .= $label['tm'] . "\t";
+			else
+				$inst_string .= $label['tm'] . "@" . $label['tool'] . "\t";
+		}
+		$inst_string .= "\n";
+		$ba_string .= "\n";
+		echo $key . "\t\t" . $inst_string . "<br/>";
+		//var_dump($labels_array[$key]);
+		//echo $key . "\n";
+		//var_dump($label_array);
 	}
 	?>
 </body>
