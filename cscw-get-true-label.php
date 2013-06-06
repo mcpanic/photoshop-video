@@ -30,7 +30,7 @@ $result1 = $mysqli->query("SELECT * FROM videos");
 $videos_array = array();
 $labels_array = array();
 $meta_array = array();
-
+	
 while ($video = $result1->fetch_assoc()) {
 	// $video_filename = $video['filename'];
 	// $string = file_get_contents("video/$video_filename.info.json");
@@ -54,17 +54,50 @@ while ($video = $result1->fetch_assoc()) {
 <html>
 <body>
 	<?php
+	// foreach ($labels_array as $key => $label_array){
+	// 	$inst_string = "";
+	// 	$ba_string = "";
+	// 	foreach ($label_array as $label){
+	// 		if ($label['type'] == "image")
+	// 			$ba_string .= $label['tm'] . "\t";
+	// 		else
+	// 			$inst_string .= $label['tm'] . "@" . $label['tool'] . "\t";
+	// 	}
+	// 	$inst_string .= "\n";
+	// 	$ba_string .= "\n";
+
+	// 	if (array_key_exists(intval($key), $cid_list))
+	// 		$vid = $cid_list[$key];
+	// 	elseif (array_key_exists(intval($key), $mid_list))
+	// 		$vid = $mid_list[$key];
+	// 	elseif (array_key_exists(intval($key), $pid_list))
+	// 		$vid = $pid_list[$key];
+
+	// 	echo $key . "\t\ts1_" . $vid . "\t\t" . $inst_string . "<br/>";
+	// 	//var_dump($labels_array[$key]);
+	// 	//echo $key . "\n";
+	// 	//var_dump($label_array);
+	// }
+	$results = array();
 	foreach ($labels_array as $key => $label_array){
-		$inst_string = "";
-		$ba_string = "";
+		$result = array();
+		// $inst_string = "";
+		// $ba_string = "";
 		foreach ($label_array as $label){
-			if ($label['type'] == "image")
+			$instruction = array();
+			if ($label['type'] == "image"){
 				$ba_string .= $label['tm'] . "\t";
-			else
+			} else{
 				$inst_string .= $label['tm'] . "@" . $label['tool'] . "\t";
+				$instruction['label_id'] = $label['id'];
+				$instruction['time'] = $label['tm'];
+				$instruction['desc'] = $label['tool'];
+				$result[$label['id']] = $instruction; 
+			}
 		}
-		$inst_string .= "\n";
-		$ba_string .= "\n";
+		// $inst_string .= "\n";
+		// $ba_string .= "\n";
+		
 
 		if (array_key_exists(intval($key), $cid_list))
 			$vid = $cid_list[$key];
@@ -72,12 +105,14 @@ while ($video = $result1->fetch_assoc()) {
 			$vid = $mid_list[$key];
 		elseif (array_key_exists(intval($key), $pid_list))
 			$vid = $pid_list[$key];
-
-		echo $key . "\t\ts1_" . $vid . "\t\t" . $inst_string . "<br/>";
+		$results["s1_".$vid] = $result;
+		//echo $key . "\t\ts1_" . $vid . "\t\t" . $inst_string . "<br/>";
 		//var_dump($labels_array[$key]);
 		//echo $key . "\n";
 		//var_dump($label_array);
 	}
+	echo json_encode($results);
+	//file_put_contents("s1_" . $domain . ".data.json", json_encode($result), FILE_APPEND);
 	?>
 </body>
 </html>
