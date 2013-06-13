@@ -53,6 +53,9 @@
   <div>
   	This web-based supplementary materials provide examples of the three video summarization methods used in Study 1, and the two interface conditions used in Study 2.
   </div>
+  <div>
+  	Browser support: Tested with Chrome on Mac and Windows. Videos might not play due to codec issues under some browsers.
+  </div>
 
   <h3>Part 1. The summarization methods used in Study 1.</h3>
 	<div id="original-demo">
