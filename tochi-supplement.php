@@ -48,9 +48,11 @@
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 <div class="container">
 
-  <h2>Supplement Materials for TOCHI-2013-0064</h2>
+  <h2>Supplementary Materials for TOCHI-2013-0064</h2>
   <h4>Summarization and Interaction Techniques for Enhancing the Learning Experience of How-to Videos</h4>
-
+  <div>
+  	This web-based supplementary materials provide examples of the three video summarization methods used in Study 1, and the two interface conditions used in Study 2.
+  </div>
 
   <h3>Part 1. The summarization methods used in Study 1.</h3>
 	<div id="original-demo">
@@ -74,7 +76,7 @@
 	    Play the video for an example.<br><br>
 	    <div id="sc-mediaplayer" class="row">video loading...</div><br><br>
 	</div>
-  <h3>Part 2. The ToolScape interface used in Study 2.</h3>
+  <h3>Part 2. The interface conditions used in Study 2.</h3>
   Click the links to open the interfaces used in Study 2.
   <h4>Interface Condition 1. Baseline</h4>
   <div id="yt-browse"><a href="tochi-list.php?part=2&step=tutorial-task&cond=A&tid=6&iid=2">Browsing Page</a></div>
