@@ -466,7 +466,7 @@
               type: "POST",
               data: {
                 tm: $("#form1 #tm").val(),
-                filepath: "video/<?=$video_filename;?>"               
+                filepath: "video/<?= substr($video_filename, 6); ?>"               
               }}).done(function(data){
                 $("#jcrop-link img").attr("src", data);                             
               }).fail(function(){

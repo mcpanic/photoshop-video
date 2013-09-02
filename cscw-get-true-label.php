@@ -111,7 +111,7 @@ while ($video = $result1->fetch_assoc()) {
 		//echo $key . "\n";
 		//var_dump($label_array);
 	}
-	echo json_encode($results);
+	echo json_encode($results, JSON_PRETTY_PRINT);
 	//file_put_contents("s1_" . $domain . ".data.json", json_encode($result), FILE_APPEND);
 	?>
 </body>
