@@ -154,10 +154,15 @@
     }
 
     function getLink(link){
+      console.log(link);
       var parts = link.split("/"); // img/thumbnails/xxx
       var subparts = parts[2].split("."); // "00003.b0yoIOX8Bk0_3.png"
-      var slug = subparts[1].substr(0, 11);
-      var sec = subparts[1].substr(12);
+      var index = 0;
+      if (subparts.length == 3)
+	index = 1;
+
+      var slug = subparts[index].substr(0, 11);
+      var sec = subparts[index].substr(12);
       return "http://juhokim.com/annotation/videos/thumbs/v_" + slug + "_" + parseInt(sec).pad(3) + ".jpg";
     }
 

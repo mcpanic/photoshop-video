@@ -35,6 +35,7 @@ while ($video = $result1->fetch_assoc()) {
 	// $video_filename = $video['filename'];
 	// $string = file_get_contents("video/$video_filename.info.json");
 	// $json = json_decode($string, true);
+	//if (!array_key_exists(intval($video['id']), $mid_list))
 	if (!array_key_exists(intval($video['id']), $cid_list) && !array_key_exists(intval($video['id']), $mid_list) && !array_key_exists(intval($video['id']), $pid_list))
 		continue;
 	$result3 = $mysqli->query("SELECT * FROM labels WHERE video_id = '" . $video['id'] . "' ORDER BY tm ASC");    
@@ -111,7 +112,7 @@ while ($video = $result1->fetch_assoc()) {
 		//echo $key . "\n";
 		//var_dump($label_array);
 	}
-	echo json_encode($results, JSON_PRETTY_PRINT);
+	echo json_encode($results);
 	//file_put_contents("s1_" . $domain . ".data.json", json_encode($result), FILE_APPEND);
 	?>
 </body>
