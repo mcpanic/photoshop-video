@@ -137,7 +137,7 @@
 //          var selected = obj.type;
         var html = "<li class='label-item' id='" + id 
           + "'><span class='list-image'><a class='jcrop-link' href='#" //+ obj.thumbnail
-          + "'><img src='" + obj.slug + "_" + obj.tm + ".png?rand=" + Math.random() + "'></a>"
+          + "'><img src='" + obj.thumbnail.split("/")[2].substr(6) + "?rand=" + Math.random() + "'></a>"
           + "</span><span class='list-time'><input type='text' class='time-field' name='tm' value='" + obj.tm 
           + "'></span><span class='list-tool'><select name='type'>" 
           + "<option value='image'>image</option><option value='tool'>tool</option><option value='menu'>menu</option><option value='other'>other</option>"
@@ -152,8 +152,8 @@
     function getLabelHTML(obj){
         var id = "label-at-" + obj.tm;
         var html = "<li class='label-item' id='" + id 
-          + "'><span class='list-image'><a class='jcrop-link' href='" + obj.slug + "_" + obj.tm + ".png"
-          + "'><img src='" + obj.slug + "_" + obj.tm + ".png?rand=" + Math.random() + "'></a>"
+          + "'><span class='list-image'><a class='jcrop-link' href='" + obj.thumbnail.split("/")[2].substr(6)
+          + "'><img src='" + obj.thumbnail.split("/")[2].substr(6) + "?rand=" + Math.random() + "'></a>"
           + "</span><span class='list-time'>" + obj.tm 
           + "</span><span class='list-tool'><b>" + obj.type + "</b><br>" + obj.tool
           + "</span><span class='list-comment'>" + obj.comment
