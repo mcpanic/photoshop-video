@@ -485,7 +485,7 @@
                 tm: $("#form1 #tm").val(),
                 filepath: "video/<?= substr($video_filename, 6); ?>"               
               }}).done(function(data){
-                console.log(getLink("HERE", data));
+                console.log("HERE", getLink(data));
                 $("#jcrop-link img").attr("src", getLink(data));                             
               }).fail(function(){
                 $("#jcrop-link").html("capture failed."); 
