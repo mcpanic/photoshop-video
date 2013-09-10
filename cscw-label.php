@@ -131,7 +131,11 @@
     function seek(time) {
       jwplayer().seek(time);
     }
-
+    
+    Number.prototype.pad = function(n) {
+        return ('0000000000' + this).slice((n || 2) * -1);
+    }
+    
     function getEditHTML(obj){
         var id = "label-at-" + obj.tm;
 //          var selected = obj.type;
@@ -150,8 +154,11 @@
     }
 
     function getLink(link){
-      var parts = link.split("/");
-      return parts[0] + "/" + parts[1] + "/" + parts[2].substr(6);
+      var parts = link.split("/"); // img/thumbnails/xxx
+      var subparts = parts.split("."); // "00003.b0yoIOX8Bk0_3.png"
+      var slug = subparts[1].substr(0, 11);
+      var sec = subparts[1].substr(12);
+      return "http://juhokim.com/annotation/videos/thumbs/v_" + slug + "_" + sec.pad(3) + ".jpg";
     }
 
     function getLabelHTML(obj){
