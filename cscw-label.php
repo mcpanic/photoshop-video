@@ -144,7 +144,7 @@
           + "'><img src='" + getLink(obj.thumbnail) + "?rand=" + Math.random() + "'></a>"
           + "</span><span class='list-time'><input type='text' class='time-field' name='tm' value='" + obj.tm 
           + "'></span><span class='list-tool'><select name='type'>" 
-          + "<option value='image'>image</option><option value='tool'>tool</option><option value='menu'>menu</option><option value='other'>other</option>"
+          + "<option value='image'>Before/After</option><option value='tool'>Instruction</option>"
           + "<br><input type='text' name='tool' value='" + obj.tool
           + "'></span><span class='list-comment'><input type='text' name='comment' value='" + obj.comment
           + "'></span><span class='list-option'><a href='javascript:seek(\"" + obj.tm + "\");'>open"
@@ -267,6 +267,7 @@
         var obj = getLabelByID(labels_array, id);
         console.log(obj);
         $li.replaceWith(getEditHTML(obj));
+        $li.find("select[name='type']").val(obj.type);
         return false;
       });
 
