@@ -34,7 +34,7 @@
   $json = json_decode($string, true);
 
   // user_id needed here because you might want to only see your own labels, not other people's.
-  $result = $mysqli->query("SELECT * FROM labels WHERE video_id='$video_id' AND user_id='$user_id' ORDER BY tm ASC");
+  $result = $mysqli->query("SELECT * FROM labels WHERE video_id='$video_id' ORDER BY tm ASC"); // AND user_id='$user_id' 
   $labels_array = array();
   while ($row = $result->fetch_assoc()) {
     $labels_array[] = $row;   
