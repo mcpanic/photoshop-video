@@ -155,7 +155,7 @@
 
     function getLink(link){
       var parts = link.split("/"); // img/thumbnails/xxx
-      var subparts = parts.split("."); // "00003.b0yoIOX8Bk0_3.png"
+      var subparts = parts[2].split("."); // "00003.b0yoIOX8Bk0_3.png"
       var slug = subparts[1].substr(0, 11);
       var sec = subparts[1].substr(12);
       return "http://juhokim.com/annotation/videos/thumbs/v_" + slug + "_" + sec.pad(3) + ".jpg";
