@@ -156,6 +156,8 @@
     function getLink(link){
       console.log(link);
       var parts = link.split("/"); // img/thumbnails/xxx
+      if (parts.length > 3) // already a full url
+	return link;
       var subparts = parts[2].split("."); // "00003.b0yoIOX8Bk0_3.png"
       var index = 0;
       if (subparts.length == 3)
@@ -266,8 +268,9 @@
         var id = $li.find("input[name='hidden-id']").val();
         var obj = getLabelByID(labels_array, id);
         console.log(obj);
+        // jQuery returns replaced element so don't use this to access the new one
         $li.replaceWith(getEditHTML(obj));
-        $li.find("select[name='type']").val(obj.type);
+        $("#label-at-" + obj.tm).find("select[name='type']").val(obj.type);
         return false;
       });
 
