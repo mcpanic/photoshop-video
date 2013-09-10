@@ -150,7 +150,7 @@
     }
 
     function getLink(link){
-      var parts = obj.thumbnail.split("/");
+      var parts = link.split("/");
       return parts[0] + "/" + parts[1] + "/" + parts[2].substr(6);
     }
 
